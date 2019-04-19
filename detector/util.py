@@ -8,6 +8,19 @@ import numpy as np
 import cv2
 
 
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters())
+
+def count_learnable_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+def convert2cpu(matrix):
+    if matrix.is_cuda:
+        return torch.FloatTensor(matrix.size()).copy_(matrix)
+    else:
+        return matrix
+
+
 def predict_transform(prediction, inp_dim, anchors, num_classes, CUDA=True):
 
     batch_size = prediction.size(0)
