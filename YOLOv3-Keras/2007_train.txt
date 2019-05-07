@@ -1,209 +1,209 @@
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000032.jpg 104,78,375,183,0 133,88,197,123,0 195,180,213,229,14 26,189,44,238,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000033.jpg 9,107,499,263,0 421,200,482,226,0 325,188,411,223,0
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000042.jpg 263,32,500,295,18 1,36,235,299,18
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000061.jpg 274,11,437,279,3 184,214,281,252,3
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000129.jpg 70,202,255,500,1 74,1,272,462,14 252,19,334,487,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000187.jpg 1,95,240,336,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000250.jpg 97,124,150,297,4
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000256.jpg 8,96,491,232,0
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000528.jpg 124,68,319,310,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000549.jpg 1,49,341,499,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000559.jpg 36,250,79,354,4 160,26,371,241,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000648.jpg 29,113,353,266,5
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000733.jpg 48,25,273,383,14 103,201,448,435,13
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000768.jpg 369,103,475,283,5 33,46,369,330,5
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000793.jpg 289,100,316,183,14 241,111,270,180,14 218,107,236,178,14 402,67,467,259,14 65,110,84,161,14 96,107,114,159,14 100,78,190,282,14 151,160,310,280,1 2,80,51,135,5
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000804.jpg 94,243,153,304,8 191,265,332,470,17
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000822.jpg 98,165,230,346,13 231,168,353,323,13
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000830.jpg 124,182,352,370,10 150,221,259,375,8 252,201,348,347,8
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000904.jpg 237,167,338,263,9 17,113,165,238,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/000999.jpg 233,317,289,405,4 2,16,280,500,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001073.jpg 55,178,149,248,9 135,176,174,241,9 227,153,282,236,9 276,159,350,255,9 327,152,425,240,9 421,161,500,227,9
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001239.jpg 108,60,320,160,11 228,138,381,375,11 118,94,286,307,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001299.jpg 39,26,229,412,9 211,240,319,408,9 318,221,408,435,9
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001408.jpg 114,245,178,448,4 56,107,230,387,14 20,68,50,167,4 210,1,333,108,14 84,87,333,366,14 119,1,184,130,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001420.jpg 192,109,340,270,12 281,80,364,268,14 436,148,500,306,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001457.jpg 136,121,350,264,17 432,212,500,375,8
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001526.jpg 3,18,114,298,14 109,51,214,297,14 212,35,316,297,14 289,33,387,297,14 381,15,500,297,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001586.jpg 28,54,429,329,12 211,40,331,237,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001594.jpg 270,153,334,208,16 231,153,269,209,16 179,149,206,210,16 151,142,180,210,16 335,93,400,218,14 253,177,302,238,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001630.jpg 26,14,54,114,14 190,27,268,214,14 74,95,200,358,14 155,196,343,500,14 333,32,373,255,14 85,231,200,428,1 149,358,340,500,1
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001717.jpg 1,111,58,169,19 371,160,476,404,14 227,99,365,404,14 146,207,263,366,8
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001733.jpg 1,270,82,329,16 236,275,294,326,16 180,275,235,365,16
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001761.jpg 27,87,500,273,0
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001825.jpg 1,39,403,300,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001834.jpg 46,39,456,304,10
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/001960.jpg 108,138,264,332,12
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002055.jpg 15,248,151,368,11 64,146,229,375,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002120.jpg 228,35,347,90,2 64,24,496,334,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002132.jpg 184,155,306,249,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002212.jpg 42,72,459,247,2
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002234.jpg 110,150,415,250,3 1,83,136,166,3
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002260.jpg 107,61,447,287,13
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002284.jpg 120,19,216,116,15 176,48,234,125,15 169,121,240,243,15 110,278,250,493,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002293.jpg 2,47,264,500,14 87,131,287,500,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002368.jpg 34,269,112,387,8 183,274,272,391,8
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002403.jpg 316,114,334,160,14 373,182,407,226,2 283,30,394,174,3
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002445.jpg 13,89,349,490,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002539.jpg 1,1,500,333,5 198,105,307,333,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002545.jpg 75,43,206,496,14 181,62,211,132,4
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002611.jpg 1,1,397,351,14 152,131,337,298,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002648.jpg 104,157,302,372,16 239,148,350,225,16 38,100,255,267,16
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002669.jpg 116,191,245,287,9 442,241,478,294,14 163,184,273,269,9
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002845.jpg 284,196,326,216,16 14,265,175,347,16 140,199,186,235,16 220,210,248,229,16 254,204,279,227,16 230,201,256,220,16
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002914.jpg 287,13,500,374,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/002953.jpg 25,102,93,325,4 94,104,166,337,4 165,103,247,347,4 216,52,416,304,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003011.jpg 198,192,385,258,17 274,218,478,374,17 35,141,142,243,19 211,150,250,190,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003051.jpg 30,82,283,207,6
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003088.jpg 107,269,154,366,4 69,65,330,375,14 209,91,286,211,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003106.jpg 208,238,404,324,7 185,15,401,374,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003110.jpg 213,127,275,266,11 121,107,188,234,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003134.jpg 64,86,184,317,14 160,72,300,284,14 270,1,483,366,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003169.jpg 54,113,474,332,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003188.jpg 54,125,320,375,1 257,4,435,375,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003205.jpg 28,76,306,376,14 11,168,322,447,8
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003330.jpg 268,96,375,247,2 166,70,238,146,2
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003349.jpg 88,55,327,289,2
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003367.jpg 1,174,38,253,14 15,213,111,302,13 354,167,389,267,15 387,130,418,170,15 422,128,447,171,15 476,142,496,173,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003373.jpg 232,160,441,329,11 176,1,330,196,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003499.jpg 107,26,496,324,18
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003506.jpg 63,42,261,287,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003525.jpg 160,1,448,375,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003529.jpg 94,45,334,305,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003565.jpg 280,218,500,317,2
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003604.jpg 62,103,500,375,11 145,1,430,142,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003621.jpg 199,153,328,271,1 249,72,334,224,14 441,62,492,120,5
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003714.jpg 177,169,298,289,16
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003786.jpg 171,165,287,273,5
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003788.jpg 164,123,320,266,7 1,1,500,281,8
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003861.jpg 115,52,287,294,3
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003889.jpg 345,75,427,295,12 157,79,282,294,12 52,105,138,297,12 337,32,439,193,14 122,35,239,188,14 1,58,102,308,14 51,48,123,196,14 431,119,472,166,8
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/003991.jpg 79,53,500,264,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004009.jpg 153,106,274,255,0
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004033.jpg 70,7,120,138,14 120,36,217,168,13 183,2,326,196,13 189,1,447,280,13
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004052.jpg 47,108,398,213,0
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004121.jpg 19,154,108,263,15 220,92,347,242,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004189.jpg 171,57,344,280,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004190.jpg 1,115,201,326,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004241.jpg 129,81,369,325,3
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004281.jpg 270,1,500,375,18
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004291.jpg 3,1,374,500,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004392.jpg 328,224,440,359,8 334,273,482,375,8 180,110,334,375,14 179,117,255,375,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004481.jpg 42,167,465,376,6 150,81,250,243,14 268,115,358,239,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004500.jpg 60,105,253,241,9 2,128,151,270,9
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004510.jpg 123,50,244,153,19 101,199,255,375,8 422,84,500,359,8
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004537.jpg 181,122,402,318,12 1,100,197,221,9 266,95,348,157,9 262,71,429,170,9 433,79,493,218,9 202,33,270,263,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004627.jpg 193,202,421,272,18 417,227,500,284,18
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004644.jpg 1,26,186,260,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004705.jpg 394,181,455,226,5 1,206,104,270,6
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004830.jpg 104,110,418,212,6
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004841.jpg 107,200,171,243,0 350,108,375,125,0
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004902.jpg 1,141,192,374,12 79,124,265,364,12 217,118,389,375,14 195,68,500,375,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/004951.jpg 51,142,500,262,18
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005058.jpg 131,266,177,304,16 86,285,127,315,16
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005086.jpg 158,184,257,262,8 39,145,144,375,14 269,42,498,372,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005107.jpg 54,195,273,337,1 271,138,288,192,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005114.jpg 311,54,404,189,14 325,103,388,242,12 451,132,500,219,9 56,136,132,257,9
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005124.jpg 179,68,500,324,9 3,33,271,324,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005130.jpg 115,131,324,433,2
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005173.jpg 13,67,227,255,13 285,64,492,264,13 230,45,458,256,14 17,32,192,247,14 406,7,460,144,14 131,23,195,128,14 261,13,312,67,14 282,1,344,69,14 87,18,138,66,14 1,3,36,105,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005262.jpg 372,205,500,298,6 14,159,53,185,6 80,114,342,241,5
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005273.jpg 108,55,285,156,6 235,84,418,153,6 336,12,415,160,14 397,50,439,154,14 1,112,305,357,1
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005304.jpg 264,75,391,282,4 1,2,472,400,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005358.jpg 231,131,278,155,0
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005360.jpg 72,97,431,242,18 1,137,71,226,18
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005368.jpg 27,346,254,500,1 9,18,323,500,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005509.jpg 11,65,463,200,0 484,153,497,192,14 429,153,444,200,14 408,150,426,204,14 309,155,328,198,14 295,155,309,202,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005547.jpg 171,175,320,368,9 48,150,447,347,6 439,148,471,269,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005600.jpg 255,136,319,165,0 100,195,114,226,14 88,195,102,224,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005705.jpg 62,16,246,408,3
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005803.jpg 67,156,433,273,10
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005813.jpg 147,164,288,354,15 105,240,207,351,15 94,195,140,352,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005859.jpg 2,3,298,375,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005911.jpg 2,50,500,314,5
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/005951.jpg 185,62,498,301,13 329,36,468,272,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006004.jpg 94,164,301,424,8 57,146,184,468,14 130,169,266,500,14 1,173,101,500,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006066.jpg 47,266,204,332,8 150,120,339,264,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006134.jpg 125,99,442,318,12
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006171.jpg 54,37,231,174,14 2,166,412,315,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006400.jpg 433,80,500,256,18 189,101,440,235,18 40,125,199,203,18
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006483.jpg 100,32,379,377,14 307,146,348,221,4 316,191,338,254,4 281,151,305,217,4
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006549.jpg 176,20,247,68,3
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006560.jpg 1,28,246,375,14 223,31,500,375,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006605.jpg 158,186,235,311,8 340,199,412,313,8 246,222,360,375,8 142,214,256,361,8 86,181,134,218,15 49,96,96,243,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006660.jpg 47,273,295,378,6 1,200,164,262,3 276,1,500,292,3
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006698.jpg 245,1,495,375,14 70,128,387,375,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006704.jpg 34,1,341,213,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006864.jpg 336,1,500,325,14 237,6,380,283,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006866.jpg 221,44,331,218,14 43,56,407,374,12 94,130,129,177,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006899.jpg 19,334,135,452,16 135,305,234,423,16 388,277,445,424,16
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/006900.jpg 1,117,150,203,6 1,151,61,310,6 86,120,490,337,6 327,82,465,185,6
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007003.jpg 188,216,327,287,5 38,256,235,375,6 196,256,313,363,6
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007007.jpg 112,203,291,374,14 1,2,298,281,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007130.jpg 106,96,192,188,19 221,80,295,157,19 355,109,475,171,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007154.jpg 68,29,260,500,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007168.jpg 48,102,372,424,18
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007250.jpg 281,227,311,330,4 122,19,327,176,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007398.jpg 1,1,499,265,5 344,64,434,280,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007417.jpg 40,67,306,208,11 304,105,451,211,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007477.jpg 259,30,421,154,3
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007481.jpg 61,53,362,317,2
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007493.jpg 235,146,489,375,14 35,4,373,375,14 1,191,22,291,4
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007524.jpg 52,47,333,472,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007530.jpg 39,65,163,203,19 183,61,326,167,7 1,313,136,500,8
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007621.jpg 301,102,411,202,16 175,113,285,209,16
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007748.jpg 76,164,332,373,12 165,111,243,284,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007795.jpg 7,108,153,374,14 107,118,207,305,14 295,151,359,269,14 334,152,408,279,14 404,154,485,322,14 258,242,304,310,15 229,167,284,234,8
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007810.jpg 80,1,337,127,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007836.jpg 2,186,227,338,1 328,192,500,332,1 355,117,500,313,14 2,124,144,330,14 228,31,263,121,14 273,40,295,116,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007878.jpg 66,67,294,373,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007908.jpg 191,2,500,333,5
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/007996.jpg 189,99,237,222,14 118,187,199,267,14 92,244,195,333,14 198,220,357,333,14 397,61,500,270,14 189,113,351,240,17
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008043.jpg 14,9,284,288,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008051.jpg 131,110,358,375,2
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008072.jpg 81,191,329,322,10 293,106,348,175,14 385,109,450,182,14 272,127,397,318,14 135,102,203,198,14 189,92,257,185,14 68,99,154,212,14 3,97,148,325,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008084.jpg 111,212,233,365,2
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008106.jpg 168,189,266,355,8 280,222,367,385,8 288,232,306,259,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008142.jpg 189,73,253,229,14 149,119,325,286,12
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008203.jpg 331,148,426,247,17 38,188,304,360,17
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008204.jpg 199,247,242,367,4 143,145,266,336,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008218.jpg 194,90,495,375,14 124,334,164,375,14 100,273,139,361,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008260.jpg 94,71,457,255,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008374.jpg 258,223,320,294,19 323,216,403,288,19 185,181,271,375,14 292,202,369,373,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008403.jpg 229,17,499,385,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008468.jpg 51,122,172,197,17 217,155,314,227,8 243,128,293,169,8
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008596.jpg 142,128,239,426,12 120,72,266,290,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008645.jpg 210,153,300,308,3
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008670.jpg 56,115,254,263,2 60,279,252,397,2
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008764.jpg 100,38,340,325,2
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008815.jpg 2,30,230,364,7
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008932.jpg 60,126,156,375,14 139,92,230,375,14 221,121,311,302,14 301,81,390,303,14 199,298,466,375,10
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008944.jpg 1,1,443,500,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008948.jpg 3,159,182,323,8 251,129,367,246,8 474,123,500,201,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008973.jpg 271,43,444,279,9
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/008980.jpg 53,58,372,428,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009068.jpg 131,217,293,337,8 5,232,77,299,8 284,160,437,335,14 1,205,283,344,14 320,181,369,240,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009209.jpg 139,105,274,213,13 146,86,225,202,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009245.jpg 17,96,288,330,9 265,150,467,248,9
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009251.jpg 180,23,309,306,12 145,74,210,192,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009252.jpg 40,200,500,369,17 325,29,423,155,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009295.jpg 296,39,440,337,14 43,104,307,375,1 263,1,500,206,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009327.jpg 117,79,258,403,14 67,273,113,334,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009392.jpg 410,194,500,331,5 249,230,294,247,6 215,223,249,237,6 173,223,206,237,6 290,223,314,233,6 19,224,51,238,6 1,283,74,331,6
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009413.jpg 24,70,149,264,8 26,231,181,500,14 252,9,500,361,14 48,333,500,500,10
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009419.jpg 52,68,134,195,15 145,207,181,277,15
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009422.jpg 2,2,481,325,2
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009446.jpg 15,47,252,298,19
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009458.jpg 2,20,111,98,4 113,13,202,110,4 202,24,290,113,4 288,40,364,107,4 338,14,402,66,4 380,52,465,103,4 397,5,473,65,4
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009562.jpg 16,38,355,472,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009605.jpg 89,18,458,369,11
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009618.jpg 183,230,305,311,1 391,273,500,321,1 191,170,251,309,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009654.jpg 1,83,296,500,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009684.jpg 57,64,380,375,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009691.jpg 1,187,497,333,13 124,15,294,333,14
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009709.jpg 257,1,375,498,4 132,2,271,495,4 1,1,141,489,4
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009756.jpg 205,24,380,287,14 118,82,420,316,13
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009807.jpg 191,61,474,332,12
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009832.jpg 277,11,500,350,5
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009911.jpg 75,137,417,265,0
-/content/gdrive/My\ Drive/data/VOCdevkit/VOC2007/JPEGImages/009938.jpg 137,55,320,340,13 242,1,325,52,6
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000032.jpg 104,78,375,183,0 133,88,197,123,0 195,180,213,229,14 26,189,44,238,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000033.jpg 9,107,499,263,0 421,200,482,226,0 325,188,411,223,0
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000042.jpg 263,32,500,295,18 1,36,235,299,18
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000061.jpg 274,11,437,279,3 184,214,281,252,3
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000129.jpg 70,202,255,500,1 74,1,272,462,14 252,19,334,487,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000187.jpg 1,95,240,336,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000250.jpg 97,124,150,297,4
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000256.jpg 8,96,491,232,0
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000528.jpg 124,68,319,310,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000549.jpg 1,49,341,499,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000559.jpg 36,250,79,354,4 160,26,371,241,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000648.jpg 29,113,353,266,5
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000733.jpg 48,25,273,383,14 103,201,448,435,13
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000768.jpg 369,103,475,283,5 33,46,369,330,5
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000793.jpg 289,100,316,183,14 241,111,270,180,14 218,107,236,178,14 402,67,467,259,14 65,110,84,161,14 96,107,114,159,14 100,78,190,282,14 151,160,310,280,1 2,80,51,135,5
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000804.jpg 94,243,153,304,8 191,265,332,470,17
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000822.jpg 98,165,230,346,13 231,168,353,323,13
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000830.jpg 124,182,352,370,10 150,221,259,375,8 252,201,348,347,8
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000904.jpg 237,167,338,263,9 17,113,165,238,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/000999.jpg 233,317,289,405,4 2,16,280,500,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001073.jpg 55,178,149,248,9 135,176,174,241,9 227,153,282,236,9 276,159,350,255,9 327,152,425,240,9 421,161,500,227,9
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001239.jpg 108,60,320,160,11 228,138,381,375,11 118,94,286,307,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001299.jpg 39,26,229,412,9 211,240,319,408,9 318,221,408,435,9
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001408.jpg 114,245,178,448,4 56,107,230,387,14 20,68,50,167,4 210,1,333,108,14 84,87,333,366,14 119,1,184,130,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001420.jpg 192,109,340,270,12 281,80,364,268,14 436,148,500,306,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001457.jpg 136,121,350,264,17 432,212,500,375,8
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001526.jpg 3,18,114,298,14 109,51,214,297,14 212,35,316,297,14 289,33,387,297,14 381,15,500,297,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001586.jpg 28,54,429,329,12 211,40,331,237,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001594.jpg 270,153,334,208,16 231,153,269,209,16 179,149,206,210,16 151,142,180,210,16 335,93,400,218,14 253,177,302,238,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001630.jpg 26,14,54,114,14 190,27,268,214,14 74,95,200,358,14 155,196,343,500,14 333,32,373,255,14 85,231,200,428,1 149,358,340,500,1
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001717.jpg 1,111,58,169,19 371,160,476,404,14 227,99,365,404,14 146,207,263,366,8
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001733.jpg 1,270,82,329,16 236,275,294,326,16 180,275,235,365,16
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001761.jpg 27,87,500,273,0
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001825.jpg 1,39,403,300,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001834.jpg 46,39,456,304,10
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/001960.jpg 108,138,264,332,12
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002055.jpg 15,248,151,368,11 64,146,229,375,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002120.jpg 228,35,347,90,2 64,24,496,334,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002132.jpg 184,155,306,249,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002212.jpg 42,72,459,247,2
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002234.jpg 110,150,415,250,3 1,83,136,166,3
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002260.jpg 107,61,447,287,13
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002284.jpg 120,19,216,116,15 176,48,234,125,15 169,121,240,243,15 110,278,250,493,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002293.jpg 2,47,264,500,14 87,131,287,500,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002368.jpg 34,269,112,387,8 183,274,272,391,8
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002403.jpg 316,114,334,160,14 373,182,407,226,2 283,30,394,174,3
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002445.jpg 13,89,349,490,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002539.jpg 1,1,500,333,5 198,105,307,333,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002545.jpg 75,43,206,496,14 181,62,211,132,4
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002611.jpg 1,1,397,351,14 152,131,337,298,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002648.jpg 104,157,302,372,16 239,148,350,225,16 38,100,255,267,16
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002669.jpg 116,191,245,287,9 442,241,478,294,14 163,184,273,269,9
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002845.jpg 284,196,326,216,16 14,265,175,347,16 140,199,186,235,16 220,210,248,229,16 254,204,279,227,16 230,201,256,220,16
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002914.jpg 287,13,500,374,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/002953.jpg 25,102,93,325,4 94,104,166,337,4 165,103,247,347,4 216,52,416,304,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003011.jpg 198,192,385,258,17 274,218,478,374,17 35,141,142,243,19 211,150,250,190,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003051.jpg 30,82,283,207,6
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003088.jpg 107,269,154,366,4 69,65,330,375,14 209,91,286,211,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003106.jpg 208,238,404,324,7 185,15,401,374,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003110.jpg 213,127,275,266,11 121,107,188,234,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003134.jpg 64,86,184,317,14 160,72,300,284,14 270,1,483,366,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003169.jpg 54,113,474,332,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003188.jpg 54,125,320,375,1 257,4,435,375,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003205.jpg 28,76,306,376,14 11,168,322,447,8
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003330.jpg 268,96,375,247,2 166,70,238,146,2
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003349.jpg 88,55,327,289,2
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003367.jpg 1,174,38,253,14 15,213,111,302,13 354,167,389,267,15 387,130,418,170,15 422,128,447,171,15 476,142,496,173,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003373.jpg 232,160,441,329,11 176,1,330,196,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003499.jpg 107,26,496,324,18
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003506.jpg 63,42,261,287,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003525.jpg 160,1,448,375,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003529.jpg 94,45,334,305,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003565.jpg 280,218,500,317,2
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003604.jpg 62,103,500,375,11 145,1,430,142,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003621.jpg 199,153,328,271,1 249,72,334,224,14 441,62,492,120,5
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003714.jpg 177,169,298,289,16
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003786.jpg 171,165,287,273,5
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003788.jpg 164,123,320,266,7 1,1,500,281,8
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003861.jpg 115,52,287,294,3
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003889.jpg 345,75,427,295,12 157,79,282,294,12 52,105,138,297,12 337,32,439,193,14 122,35,239,188,14 1,58,102,308,14 51,48,123,196,14 431,119,472,166,8
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/003991.jpg 79,53,500,264,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004009.jpg 153,106,274,255,0
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004033.jpg 70,7,120,138,14 120,36,217,168,13 183,2,326,196,13 189,1,447,280,13
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004052.jpg 47,108,398,213,0
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004121.jpg 19,154,108,263,15 220,92,347,242,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004189.jpg 171,57,344,280,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004190.jpg 1,115,201,326,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004241.jpg 129,81,369,325,3
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004281.jpg 270,1,500,375,18
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004291.jpg 3,1,374,500,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004392.jpg 328,224,440,359,8 334,273,482,375,8 180,110,334,375,14 179,117,255,375,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004481.jpg 42,167,465,376,6 150,81,250,243,14 268,115,358,239,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004500.jpg 60,105,253,241,9 2,128,151,270,9
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004510.jpg 123,50,244,153,19 101,199,255,375,8 422,84,500,359,8
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004537.jpg 181,122,402,318,12 1,100,197,221,9 266,95,348,157,9 262,71,429,170,9 433,79,493,218,9 202,33,270,263,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004627.jpg 193,202,421,272,18 417,227,500,284,18
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004644.jpg 1,26,186,260,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004705.jpg 394,181,455,226,5 1,206,104,270,6
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004830.jpg 104,110,418,212,6
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004841.jpg 107,200,171,243,0 350,108,375,125,0
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004902.jpg 1,141,192,374,12 79,124,265,364,12 217,118,389,375,14 195,68,500,375,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/004951.jpg 51,142,500,262,18
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005058.jpg 131,266,177,304,16 86,285,127,315,16
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005086.jpg 158,184,257,262,8 39,145,144,375,14 269,42,498,372,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005107.jpg 54,195,273,337,1 271,138,288,192,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005114.jpg 311,54,404,189,14 325,103,388,242,12 451,132,500,219,9 56,136,132,257,9
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005124.jpg 179,68,500,324,9 3,33,271,324,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005130.jpg 115,131,324,433,2
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005173.jpg 13,67,227,255,13 285,64,492,264,13 230,45,458,256,14 17,32,192,247,14 406,7,460,144,14 131,23,195,128,14 261,13,312,67,14 282,1,344,69,14 87,18,138,66,14 1,3,36,105,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005262.jpg 372,205,500,298,6 14,159,53,185,6 80,114,342,241,5
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005273.jpg 108,55,285,156,6 235,84,418,153,6 336,12,415,160,14 397,50,439,154,14 1,112,305,357,1
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005304.jpg 264,75,391,282,4 1,2,472,400,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005358.jpg 231,131,278,155,0
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005360.jpg 72,97,431,242,18 1,137,71,226,18
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005368.jpg 27,346,254,500,1 9,18,323,500,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005509.jpg 11,65,463,200,0 484,153,497,192,14 429,153,444,200,14 408,150,426,204,14 309,155,328,198,14 295,155,309,202,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005547.jpg 171,175,320,368,9 48,150,447,347,6 439,148,471,269,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005600.jpg 255,136,319,165,0 100,195,114,226,14 88,195,102,224,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005705.jpg 62,16,246,408,3
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005803.jpg 67,156,433,273,10
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005813.jpg 147,164,288,354,15 105,240,207,351,15 94,195,140,352,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005859.jpg 2,3,298,375,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005911.jpg 2,50,500,314,5
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/005951.jpg 185,62,498,301,13 329,36,468,272,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006004.jpg 94,164,301,424,8 57,146,184,468,14 130,169,266,500,14 1,173,101,500,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006066.jpg 47,266,204,332,8 150,120,339,264,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006134.jpg 125,99,442,318,12
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006171.jpg 54,37,231,174,14 2,166,412,315,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006400.jpg 433,80,500,256,18 189,101,440,235,18 40,125,199,203,18
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006483.jpg 100,32,379,377,14 307,146,348,221,4 316,191,338,254,4 281,151,305,217,4
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006549.jpg 176,20,247,68,3
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006560.jpg 1,28,246,375,14 223,31,500,375,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006605.jpg 158,186,235,311,8 340,199,412,313,8 246,222,360,375,8 142,214,256,361,8 86,181,134,218,15 49,96,96,243,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006660.jpg 47,273,295,378,6 1,200,164,262,3 276,1,500,292,3
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006698.jpg 245,1,495,375,14 70,128,387,375,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006704.jpg 34,1,341,213,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006864.jpg 336,1,500,325,14 237,6,380,283,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006866.jpg 221,44,331,218,14 43,56,407,374,12 94,130,129,177,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006899.jpg 19,334,135,452,16 135,305,234,423,16 388,277,445,424,16
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/006900.jpg 1,117,150,203,6 1,151,61,310,6 86,120,490,337,6 327,82,465,185,6
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007003.jpg 188,216,327,287,5 38,256,235,375,6 196,256,313,363,6
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007007.jpg 112,203,291,374,14 1,2,298,281,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007130.jpg 106,96,192,188,19 221,80,295,157,19 355,109,475,171,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007154.jpg 68,29,260,500,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007168.jpg 48,102,372,424,18
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007250.jpg 281,227,311,330,4 122,19,327,176,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007398.jpg 1,1,499,265,5 344,64,434,280,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007417.jpg 40,67,306,208,11 304,105,451,211,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007477.jpg 259,30,421,154,3
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007481.jpg 61,53,362,317,2
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007493.jpg 235,146,489,375,14 35,4,373,375,14 1,191,22,291,4
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007524.jpg 52,47,333,472,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007530.jpg 39,65,163,203,19 183,61,326,167,7 1,313,136,500,8
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007621.jpg 301,102,411,202,16 175,113,285,209,16
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007748.jpg 76,164,332,373,12 165,111,243,284,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007795.jpg 7,108,153,374,14 107,118,207,305,14 295,151,359,269,14 334,152,408,279,14 404,154,485,322,14 258,242,304,310,15 229,167,284,234,8
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007810.jpg 80,1,337,127,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007836.jpg 2,186,227,338,1 328,192,500,332,1 355,117,500,313,14 2,124,144,330,14 228,31,263,121,14 273,40,295,116,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007878.jpg 66,67,294,373,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007908.jpg 191,2,500,333,5
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/007996.jpg 189,99,237,222,14 118,187,199,267,14 92,244,195,333,14 198,220,357,333,14 397,61,500,270,14 189,113,351,240,17
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008043.jpg 14,9,284,288,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008051.jpg 131,110,358,375,2
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008072.jpg 81,191,329,322,10 293,106,348,175,14 385,109,450,182,14 272,127,397,318,14 135,102,203,198,14 189,92,257,185,14 68,99,154,212,14 3,97,148,325,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008084.jpg 111,212,233,365,2
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008106.jpg 168,189,266,355,8 280,222,367,385,8 288,232,306,259,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008142.jpg 189,73,253,229,14 149,119,325,286,12
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008203.jpg 331,148,426,247,17 38,188,304,360,17
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008204.jpg 199,247,242,367,4 143,145,266,336,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008218.jpg 194,90,495,375,14 124,334,164,375,14 100,273,139,361,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008260.jpg 94,71,457,255,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008374.jpg 258,223,320,294,19 323,216,403,288,19 185,181,271,375,14 292,202,369,373,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008403.jpg 229,17,499,385,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008468.jpg 51,122,172,197,17 217,155,314,227,8 243,128,293,169,8
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008596.jpg 142,128,239,426,12 120,72,266,290,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008645.jpg 210,153,300,308,3
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008670.jpg 56,115,254,263,2 60,279,252,397,2
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008764.jpg 100,38,340,325,2
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008815.jpg 2,30,230,364,7
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008932.jpg 60,126,156,375,14 139,92,230,375,14 221,121,311,302,14 301,81,390,303,14 199,298,466,375,10
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008944.jpg 1,1,443,500,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008948.jpg 3,159,182,323,8 251,129,367,246,8 474,123,500,201,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008973.jpg 271,43,444,279,9
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/008980.jpg 53,58,372,428,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009068.jpg 131,217,293,337,8 5,232,77,299,8 284,160,437,335,14 1,205,283,344,14 320,181,369,240,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009209.jpg 139,105,274,213,13 146,86,225,202,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009245.jpg 17,96,288,330,9 265,150,467,248,9
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009251.jpg 180,23,309,306,12 145,74,210,192,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009252.jpg 40,200,500,369,17 325,29,423,155,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009295.jpg 296,39,440,337,14 43,104,307,375,1 263,1,500,206,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009327.jpg 117,79,258,403,14 67,273,113,334,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009392.jpg 410,194,500,331,5 249,230,294,247,6 215,223,249,237,6 173,223,206,237,6 290,223,314,233,6 19,224,51,238,6 1,283,74,331,6
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009413.jpg 24,70,149,264,8 26,231,181,500,14 252,9,500,361,14 48,333,500,500,10
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009419.jpg 52,68,134,195,15 145,207,181,277,15
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009422.jpg 2,2,481,325,2
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009446.jpg 15,47,252,298,19
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009458.jpg 2,20,111,98,4 113,13,202,110,4 202,24,290,113,4 288,40,364,107,4 338,14,402,66,4 380,52,465,103,4 397,5,473,65,4
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009562.jpg 16,38,355,472,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009605.jpg 89,18,458,369,11
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009618.jpg 183,230,305,311,1 391,273,500,321,1 191,170,251,309,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009654.jpg 1,83,296,500,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009684.jpg 57,64,380,375,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009691.jpg 1,187,497,333,13 124,15,294,333,14
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009709.jpg 257,1,375,498,4 132,2,271,495,4 1,1,141,489,4
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009756.jpg 205,24,380,287,14 118,82,420,316,13
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009807.jpg 191,61,474,332,12
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009832.jpg 277,11,500,350,5
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009911.jpg 75,137,417,265,0
+/content/gdrive/My Drive/data/VOCdevkit/VOC2007/JPEGImages/009938.jpg 137,55,320,340,13 242,1,325,52,6
