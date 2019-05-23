@@ -6,8 +6,8 @@
 
 ✅ 使用Keras实现YOLOv3。
 
-[On Going] 参考Mask-RCNN修改YOLOv3网络框架。
+[Debugging] 参考Mask-RCNN修改YOLOv3网络框架。
 
 ✅ 制作数据集。
 
-[] 开始训练。
+[*] 开始训练。
