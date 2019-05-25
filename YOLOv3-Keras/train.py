@@ -107,7 +107,7 @@ def create_tiny_model(input_shape, anchors, num_classes, load_pretrained=True, f
     h, w = input_shape
     num_anchors = len(anchors)
 
-    y_true = [Input(shape=(h//{0:32, 1:16}[l], w//{0:32, 1:16}[l], \
+    y_true = [Input(shape=(h//{0:32, 1:16}[l], w//{0:32, 1:16}[l],
         num_anchors//2, num_classes+5)) for l in range(2)]
 
     model_body = tiny_yolo_body(image_input, num_anchors//2, num_classes)
