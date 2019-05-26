@@ -21,7 +21,7 @@ from keras.utils import multi_gpu_model
 
 class YOLO(object):
     _defaults = {
-        "model_path": 'model_data/yolo-tiny.h5',
+        "model_path": 'model_data/test.h5',
         # "model_path": 'model_data/yolo-tiny.h5',
         "anchors_path": 'model_data/tiny_yolo_anchors.txt',
         "classes_path": 'model_data/coco_classes.txt',
@@ -121,7 +121,7 @@ class YOLO(object):
         # print(image_data.shape)
         image_data /= 255.
         image_data = np.expand_dims(image_data, 0)  # Add batch dimension.
-        print(image_data.shape)
+        # print(image_data.shape)
         # 图像预处理结束，输出图像大小（1, 416， 416， 3）
 
         # 将图像输入模型进行预测
@@ -135,7 +135,7 @@ class YOLO(object):
         # 预测结束，得到out_boxes, out_scores, out_classes
         # 输出找到了一个物体，下一步使用结果数据在图像上画框，展示结果
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
-        print(self.yolo_model.output[0].shape)
+        # print(self.yolo_model.output[0].shape)
         # 最后feature map的通道数是255=（3*（5+80）），每个格子有3个anchor
 
         font = ImageFont.truetype(font='font/FiraMono-Medium.otf',
@@ -156,7 +156,7 @@ class YOLO(object):
             left = max(0, np.floor(left + 0.5).astype('int32'))
             bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
-            print(label, (left, top), (right, bottom))
+            # print(label, (left, top), (right, bottom))
 
             if top - label_size[1] >= 0:
                 text_origin = np.array([left, top - label_size[1]])

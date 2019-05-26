@@ -71,13 +71,13 @@ def tiny_yolo_body(inputs, num_anchors, num_classes):
 
 def yolo_head(feats, anchors, num_classes, input_shape, calc_loss=False):
     """Convert final layer features to bounding box parameters."""
-    print("feats is", feats)
+    # print("feats is", feats)
     # feats' shape is (?, ?, 255)
     # 这些工作都在输入数据前做完了，所以是先搭一个数据流，搭完以后，数据走完全程出结果？probably.
     # probably because yolo make predict in different scale, feats shape are different.
     # The above is not right.
     num_anchors = len(anchors)
-    print('number of anchors is ', num_anchors)
+
     # Reshape to batch, height, width, num_anchors, box_params.
     anchors_tensor = K.reshape(K.constant(anchors), [1, 1, 1, num_anchors, 2])
 
@@ -100,9 +100,7 @@ def yolo_head(feats, anchors, num_classes, input_shape, calc_loss=False):
     box_class_probs = K.sigmoid(feats[..., 5:])
 
     # grid包含grid的位置
-    print(grid, feats, box_xy, box_wh)
     # Tensor("Cast_4:0", shape=(?, ?, 1, 2), dtype=float32) Tensor("Reshape_9:0", shape=(?, ?, ?, 3, 85), dtype=float32) Tensor("truediv_8:0", shape=(?, ?, ?, 3, 2), dtype=float32) Tensor("truediv_9:0", shape=(?, ?, ?, 3, 2), dtype=float32)
-    print(box_xy, box_wh, box_confidence, box_class_probs)
     # Tensor("truediv_8:0", shape=(?, ?, ?, 3, 2), dtype=float32) Tensor("truediv_9:0", shape=(?, ?, ?, 3, 2), dtype=float32) Tensor("Sigmoid_4:0", shape=(?, ?, ?, 3, 1), dtype=float32) Tensor("Sigmoid_5:0", shape=(?, ?, ?, 3, 80), dtype=float32)
 
     if calc_loss == True:
@@ -164,7 +162,7 @@ def yolo_eval(yolo_outputs,
     # 每个输出的尺度不同，需要不同尺度的anchor_mask
     anchor_mask = [[6, 7, 8], [3, 4, 5], [0, 1, 2]] if num_layers == 3 else [[3, 4, 5], [1, 2, 3]]  # default setting
     input_shape = K.shape(yolo_outputs[0])[1:3] * 32
-    print(input_shape)
+
     boxes = []
     box_scores = []
     for l in range(num_layers):
@@ -219,6 +217,7 @@ def preprocess_true_boxes(true_boxes, input_shape, anchors, num_classes):
 
     '''
     assert (true_boxes[..., 4] < num_classes).all(), 'class id must be less than num_classes'
+    # how many output. tiny yolo is 2.
     num_layers = len(anchors) // 3  # default setting
     anchor_mask = [[6, 7, 8], [3, 4, 5], [0, 1, 2]] if num_layers == 3 else [[3, 4, 5], [1, 2, 3]]
 

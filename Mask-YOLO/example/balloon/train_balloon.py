@@ -14,7 +14,7 @@ from matplotlib.patches import Rectangle
 ROOT_DIR = '/Users/stark/Mask-YOLOv3/Mask-YOLO'
 
 config = BalloonConfig()
-config.display()
+# config.display()
 
 balloon_DIR = os.path.join(ROOT_DIR, "datasets/balloon")
 

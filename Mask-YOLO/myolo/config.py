@@ -33,18 +33,29 @@ class Config(object):
 
     LOG_DIR = 'logs/000/'
 
-    # GRID_H, GRID_W = 7, 7
+    GRID_H, GRID_W = 13, 13
     #
-    # N_BOX = 3
+    N_BOX = 3
+
+    IMAGE_SHAPE = [416, 416, 3]
+
+    TRUE_BOX_BUFFER = 10
+    BATCH_SIZE = 1
+    OBJECT_SCALE = 5.0
+    COORD_SCALE = 1.0
+    CLASS_SCALE = 1.0
+    NO_OBJECT_SCALE = 1.0
+    WARM_UP_BATCHES = 0
+    CLASS_WEIGHTS = np.ones(2, dtype='float32')
 
     # NUMBER OF GPUs to use. When using only a CPU, this needs to be set to 1.
-    GPU_COUNT = 1
+    GPU_COUNT = 0
 
     # Number of images to train with on each GPU. A 12GB GPU can typically
     # handle 2 images of 1024x1024px.
     # Adjust based on your GPU memory and image sizes. Use the highest
     # number that your GPU can handle for best performance.
-    IMAGES_PER_GPU = 2
+    IMAGES_PER_GPU = (BATCH_SIZE / GPU_COUNT) if GPU_COUNT != 0 else 0
 
     # Number of training steps per epoch
     # This doesn't need to match the size of the training set. Tensorboard
@@ -58,14 +69,14 @@ class Config(object):
     # Number of validation steps to run at the end of every training epoch.
     # A bigger number improves accuracy of validation stats, but slows
     # down the training.
-    VALIDATION_STEPS = 50
+    VALIDATION_STEPS = 5
 
     # Backbone network architecture
     # Supported values are: resnet50, resnet101.
     # You can also provide a callable that should have the signature
     # of model.resnet_graph. If you do so, you need to supply a callable
     # to COMPUTE_BACKBONE_SHAPE as well
-    BACKBONE = "resnet101"
+    BACKBONE = "mobilenet"  # or resnet50, resnet101
 
     # Only useful if you supply a callable to BACKBONE. Should compute
     # the shape of each layer of the FPN Pyramid.
@@ -74,16 +85,16 @@ class Config(object):
 
     # The strides of each layer of the FPN Pyramid. These values
     # are based on a Resnet101 backbone.
-    BACKBONE_STRIDES = [4, 8, 16, 32, 64]
+    # BACKBONE_STRIDES = [4, 8, 16, 32, 64]
+    BACKBONE_STRIDES = [8]
 
     # Size of the fully-connected layers in the classification graph
     FPN_CLASSIF_FC_LAYERS_SIZE = 1024
 
     # Size of the top-down layers used to build the feature pyramid
-    TOP_DOWN_PYRAMID_SIZE = 256
-
-    # Number of classification classes (including background)
-    NUM_CLASSES = 1  # Override in sub-classes
+    # TOP_DOWN_PYRAMID_SIZE = 256
+    TOP_FEATURE_MAP_DEPTH = 256
+    SECOND_PHASE_YOLO_DEPTH = 512
 
     # Length of square anchor side in pixels
     RPN_ANCHOR_SCALES = (32, 64, 128, 256, 512)
@@ -102,18 +113,18 @@ class Config(object):
     RPN_NMS_THRESHOLD = 0.7
 
     # How many anchors per image to use for RPN training
-    RPN_TRAIN_ANCHORS_PER_IMAGE = 256
+    # RPN_TRAIN_ANCHORS_PER_IMAGE = 256
 
     # ROIs kept after tf.nn.top_k and before non-maximum suppression
-    PRE_NMS_LIMIT = 6000
+    # PRE_NMS_LIMIT = 6000
 
     # ROIs kept after non-maximum suppression (training and inference)
-    POST_NMS_ROIS_TRAINING = 2000
-    POST_NMS_ROIS_INFERENCE = 1000
+    # POST_NMS_ROIS_TRAINING = 2000
+    # POST_NMS_ROIS_INFERENCE = 1000
 
     # If enabled, resizes instance masks to a smaller size to reduce
     # memory load. Recommended when using high-resolution images.
-    USE_MINI_MASK = True
+    USE_MINI_MASK = False
     MINI_MASK_SHAPE = (56, 56)  # (height, width) of the mini-mask
 
     # Input image resizing
@@ -137,12 +148,12 @@ class Config(object):
     #         size IMAGE_MIN_DIM x IMAGE_MIN_DIM. Can be used in training only.
     #         IMAGE_MAX_DIM is not used in this mode.
     IMAGE_RESIZE_MODE = "square"
-    IMAGE_MIN_DIM = 800
-    IMAGE_MAX_DIM = 1024
+    IMAGE_MIN_DIM = 416
+    IMAGE_MAX_DIM = 416
     # Minimum scaling ratio. Checked after MIN_IMAGE_DIM and can force further
     # up scaling. For example, if set to 2 then images are scaled up to double
     # the width and height, or more, even if MIN_IMAGE_DIM doesn't require it.
-    # However, in 'square' mode, it can be overruled by IMAGE_MAX_DIM.
+    # Howver, in 'square' mode, it can be overruled by IMAGE_MAX_DIM.
     IMAGE_MIN_SCALE = 0
     # Number of color channels per image. RGB = 3, grayscale = 1, RGB-D = 4
     # Changing this requires other changes in the code. See the WIKI for more
@@ -150,17 +161,17 @@ class Config(object):
     IMAGE_CHANNEL_COUNT = 3
 
     # Image mean (RGB)
-    MEAN_PIXEL = np.array([123.7, 116.8, 103.9])
+    # MEAN_PIXEL = np.array([123.7, 116.8, 103.9])
 
     # Number of ROIs per image to feed to classifier/mask heads
     # The Mask RCNN paper uses 512 but often the RPN doesn't generate
     # enough positive proposals to fill this and keep a positive:negative
     # ratio of 1:3. You can increase the number of proposals by adjusting
     # the RPN NMS threshold.
-    TRAIN_ROIS_PER_IMAGE = 200
+    TRAIN_ROIS_PER_IMAGE = GRID_H * GRID_W * N_BOX
 
     # Percent of positive ROIs used to train classifier/mask heads
-    ROI_POSITIVE_RATIO = 0.33
+    # ROI_POSITIVE_RATIO = 0.33
 
     # Pooled ROIs
     POOL_SIZE = 7
@@ -174,18 +185,18 @@ class Config(object):
     MAX_GT_INSTANCES = 100
 
     # Bounding box refinement standard deviation for RPN and final detections.
-    RPN_BBOX_STD_DEV = np.array([0.1, 0.1, 0.2, 0.2])
-    BBOX_STD_DEV = np.array([0.1, 0.1, 0.2, 0.2])
+    # RPN_BBOX_STD_DEV = np.array([0.1, 0.1, 0.2, 0.2])
+    # BBOX_STD_DEV = np.array([0.1, 0.1, 0.2, 0.2])
 
     # Max number of final detections
-    DETECTION_MAX_INSTANCES = 100
+    # DETECTION_MAX_INSTANCES = 100
 
     # Minimum probability value to accept a detected instance
     # ROIs below this threshold are skipped
-    DETECTION_MIN_CONFIDENCE = 0.7
+    # DETECTION_MIN_CONFIDENCE = 0.7
 
     # Non-maximum suppression threshold for detection
-    DETECTION_NMS_THRESHOLD = 0.3
+    # DETECTION_NMS_THRESHOLD = 0.3
 
     # Learning rate and momentum
     # The Mask RCNN paper uses lr=0.02, but on TensorFlow it causes
@@ -200,11 +211,11 @@ class Config(object):
     # Loss weights for more precise optimization.
     # Can be used for R-CNN training setup.
     LOSS_WEIGHTS = {
-        "rpn_class_loss": 1.,
-        "rpn_bbox_loss": 1.,
-        "mrcnn_class_loss": 1.,
-        "mrcnn_bbox_loss": 1.,
-        "mrcnn_mask_loss": 1.
+        "yolo_sum_loss": 1.,
+        "myolo_mask_loss": 1.,
+        # "mrcnn_class_loss": 1.,
+        # "mrcnn_bbox_loss": 1.,
+        # "mrcnn_mask_loss": 1.
     }
 
     # Use RPN ROIs or externally generated ROIs for training
@@ -212,7 +223,7 @@ class Config(object):
     # the head branches on ROI generated by code rather than the ROIs from
     # the RPN. For example, to debug the classifier head without having to
     # train the RPN.
-    USE_RPN_ROIS = True
+    # USE_RPN_ROIS = True
 
     # Train or freeze batch normalization layers
     #     None: Train BN layers. This is the normal mode
@@ -221,24 +232,24 @@ class Config(object):
     TRAIN_BN = False  # Defaulting to False since batch size is often small
 
     # Gradient norm clipping
-    GRADIENT_CLIP_NORM = 5.0
+    GRADIENT_CLIP_NORM = 1.0
 
-    def __init__(self):
-        """Set values of computed attributes."""
-        # Effective batch size
-        self.BATCH_SIZE = self.IMAGES_PER_GPU * self.GPU_COUNT
-
-        # Input image size
-        if self.IMAGE_RESIZE_MODE == "crop":
-            self.IMAGE_SHAPE = np.array([self.IMAGE_MIN_DIM, self.IMAGE_MIN_DIM,
-                                         self.IMAGE_CHANNEL_COUNT])
-        else:
-            self.IMAGE_SHAPE = np.array([self.IMAGE_MAX_DIM, self.IMAGE_MAX_DIM,
-                                         self.IMAGE_CHANNEL_COUNT])
-
-        # Image meta data length
-        # See compose_image_meta() for details
-        self.IMAGE_META_SIZE = 1 + 3 + 3 + 4 + 1 + self.NUM_CLASSES
+    # def __init__(self):
+    #     """Set values of computed attributes."""
+    #     # Effective batch size
+    #     # self.BATCH_SIZE = self.IMAGES_PER_GPU * self.GPU_COUNT
+    #
+    #     # Input image size
+    #     if self.IMAGE_RESIZE_MODE == "crop":
+    #         self.IMAGE_SHAPE = np.array([self.IMAGE_MIN_DIM, self.IMAGE_MIN_DIM,
+    #                                      self.IMAGE_CHANNEL_COUNT])
+    #     else:
+    #         self.IMAGE_SHAPE = np.array([self.IMAGE_MAX_DIM, self.IMAGE_MAX_DIM,
+    #                                      self.IMAGE_CHANNEL_COUNT])
+    #
+    #     # Image meta data length
+    #     # See compose_image_meta() for details
+    #     self.IMAGE_META_SIZE = 1 + 3 + 3 + 4 + 1 + self.NUM_CLASSES
 
     def display(self):
         """Display Configuration values."""

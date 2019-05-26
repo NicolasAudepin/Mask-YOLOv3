@@ -53,6 +53,7 @@ class MaskYOLO:
         self.keras_model = self.build(mode=mode)
         self.epoch = 0
 
+        # TODO freeze_body need be clear
     def build(self, mode, load_pretrained=True, freeze_body=2):
         '''create the training model, for Tiny YOLOv3'''
         K.clear_session()  # get a new session
@@ -68,9 +69,16 @@ class MaskYOLO:
         num_anchors = len(anchors)
 
         if mode == 'yolo':
+            # tiny yolo have two output y1, y2. input image after 32x down sample
+            # to get y1, so y1's shape = input.shape // 32
+            # the same way to get y2's shape below.
+            # y_true = [y1, y2]
+            # why anchors box have six anchors but we use three of them
+            # yolo have nine anchors we use three of them too
             y_true = [Input(shape=(h // {0: 32, 1: 16}[l], w // {0: 32, 1: 16}[l],
                                    num_anchors // 2, num_classes + 5)) for l in range(2)]
 
+            # model_body input: image_input, output: [y1, y2]
             model_body = tiny_yolo_body(image_input, num_anchors // 2, num_classes)
             print('Create Tiny YOLOv3 model with {} anchors and {} classes.'.format(num_anchors, num_classes))
 
@@ -155,18 +163,18 @@ class MaskYOLO:
                                      use_mini_mask=self.config.USE_MINI_MASK)
             val_info.append([image, gt_class_ids, gt_boxes, gt_masks])
 
-        train_generator = utils.BatchGenerator(train_info, self.config, mode=self.mode,
-                                                shuffle=True, jitter=False, norm=True)
-        val_generator = utils.BatchGenerator(val_info, self.config, mode=self.mode,
-                                              shuffle=True, jitter=False, norm=True)
-        # Create log_dir if it does not exist
-        # if not os.path.exists(self.log_dir):
-        #     os.makedirs(self.log_dir)
+        # train_generator = utils.BatchGenerator(train_info, self.config, mode=self.mode,
+        #                                         shuffle=True, jitter=False, norm=True)
 
-        # now = datetime.datetime.now()
-        # tz = timezone('US/Eastern')
-        # fmt = '%b%d-%H-%M'
-        # now = tz.localize(now)
+        # val_generator = utils.BatchGenerator(val_info, self.config, mode=self.mode,
+        #                                       shuffle=True, jitter=False, norm=True)
+
+        train_generator = utils.data_generator(train_info, 3, self.config)
+        val_generator = utils.data_generator(val_info, 3, self.config)
+
+        # Create log_dir if it does not exist
+        if not os.path.exists(self.config.LOG_DIR):
+            os.makedirs(self.config.LOG_DIR)
 
         # Callbacks
         callbacks = [
@@ -187,29 +195,17 @@ class MaskYOLO:
             'yolo_loss': lambda y_true, y_pred: y_pred}
                                  )
 
-        # Work-around for Windows: Keras fails on Windows when using
-        # multiprocessing workers. See discussion here:
-        # https://github.com/matterport/Mask_RCNN/issues/13#issuecomment-353124009
-        if os.name is 'nt':
-            workers = 0
-        else:
-            workers = multiprocessing.cpu_count()
-
-        self.keras_model.fit_generator(
-            generator=train_generator,
-            steps_per_epoch=len(train_generator),
-            # initial_epoch=self.epoch,
-            epochs=epochs,
-            callbacks=callbacks,
+        num_train = 3
+        num_val = 3
+        batch_size = 1
+        self.keras_model.fit_generator(train_generator,
+            steps_per_epoch=max(1, num_train//batch_size),
             validation_data=val_generator,
-            validation_steps=len(val_generator),
-            max_queue_size=3,
-            verbose=1
-            # workers=workers,
-            # use_multiprocessing=False,
-        )
+            validation_steps=max(1, num_val//batch_size),
+            epochs=100,
+            initial_epoch=0,
+            callbacks=callbacks)
         self.epoch = max(self.epoch, epochs)
-
 
     def load_weights(self, filepath, by_name=False, exclude=None):
         """Modified version of the corresponding Keras function with
@@ -458,3 +454,81 @@ class MaskYOLO:
             if full_masks else np.empty(image_shape[:2] + (0,))
 
         return boxes, class_ids, scores, full_masks
+
+
+    def detect_image(self, image):
+        start = timer()
+
+        if self.model_image_size != (None, None):
+            assert self.model_image_size[0]%32 == 0, 'Multiples of 32 required'
+            assert self.model_image_size[1]%32 == 0, 'Multiples of 32 required'
+            boxed_image = letterbox_image(image, tuple(reversed(self.model_image_size)))
+        else:
+            new_image_size = (image.width - (image.width % 32),
+                              image.height - (image.height % 32))
+            boxed_image = letterbox_image(image, new_image_size)
+        image_data = np.array(boxed_image, dtype='float32')
+
+        # print(image_data.shape)
+        image_data /= 255.
+        image_data = np.expand_dims(image_data, 0)  # Add batch dimension.
+        # print(image_data.shape)
+        # 图像预处理结束，输出图像大小（1, 416， 416， 3）
+
+        # 将图像输入模型进行预测
+        out_boxes, out_scores, out_classes = self.sess.run(
+            [self.boxes, self.scores, self.classes],
+            feed_dict={
+                self.yolo_model.input: image_data,
+                self.input_image_shape: [image.size[1], image.size[0]],
+                K.learning_phase(): 0
+            })
+        # 预测结束，得到out_boxes, out_scores, out_classes
+        # 输出找到了一个物体，下一步使用结果数据在图像上画框，展示结果
+        print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
+        # print(self.yolo_model.output[0].shape)
+        # 最后feature map的通道数是255=（3*（5+80）），每个格子有3个anchor
+
+        font = ImageFont.truetype(font='font/FiraMono-Medium.otf',
+                    size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
+        thickness = (image.size[0] + image.size[1]) // 300
+
+        for i, c in reversed(list(enumerate(out_classes))):
+            predicted_class = self.class_names[c]
+            box = out_boxes[i]
+            score = out_scores[i]
+
+            label = '{} {:.2f}'.format(predicted_class, score)
+            draw = ImageDraw.Draw(image)
+            label_size = draw.textsize(label, font)
+
+            top, left, bottom, right = box
+            top = max(0, np.floor(top + 0.5).astype('int32'))
+            left = max(0, np.floor(left + 0.5).astype('int32'))
+            bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
+            right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
+            # print(label, (left, top), (right, bottom))
+
+            if top - label_size[1] >= 0:
+                text_origin = np.array([left, top - label_size[1]])
+            else:
+                text_origin = np.array([left, top + 1])
+
+            # My kingdom for a good redistributable image drawing library.
+            for i in range(thickness):
+                draw.rectangle(
+                    [left + i, top + i, right - i, bottom - i],
+                    outline=self.colors[c])
+            draw.rectangle(
+                [tuple(text_origin), tuple(text_origin + label_size)],
+                fill=self.colors[c])
+            draw.text(text_origin, label, fill=(0, 0, 0), font=font)
+            del draw
+
+        end = timer()
+        print(end - start)
+        return image
+
+    def close_session(self):
+        self.sess.close()
+
