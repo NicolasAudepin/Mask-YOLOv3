@@ -4,3 +4,5 @@ detector/.DS_Store
 *.weights
 *.jpg
 *.h5
+*.pyc
+*.local
