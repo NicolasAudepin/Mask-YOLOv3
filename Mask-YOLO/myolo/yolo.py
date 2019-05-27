@@ -154,14 +154,14 @@ class MaskYOLO:
 
         # Data generators
         train_info = []
-        for id in range(0, 3):
+        for id in range(0, 50):
             image, gt_class_ids, gt_boxes, gt_masks = \
                 utils.load_image_gt(train_dataset, self.config, id,
                                      use_mini_mask=self.config.USE_MINI_MASK)
             train_info.append([image, gt_class_ids, gt_boxes, gt_masks])
 
         val_info = []
-        for id in range(0, 3):
+        for id in range(0, 10):
             image, gt_class_ids, gt_boxes, gt_masks = \
                 utils.load_image_gt(val_dataset, self.config, id,
                                      use_mini_mask=self.config.USE_MINI_MASK)
@@ -173,8 +173,8 @@ class MaskYOLO:
         # val_generator = utils.BatchGenerator(val_info, self.config, mode=self.mode,
         #                                       shuffle=True, jitter=False, norm=True)
 
-        train_generator = utils.data_generator(train_info, 3, self.config)
-        val_generator = utils.data_generator(val_info, 3, self.config)
+        train_generator = utils.data_generator(train_info, 50, self.config)
+        val_generator = utils.data_generator(val_info, 10, self.config)
 
         # Create log_dir if it does not exist
         if not os.path.exists(self.config.LOG_DIR):
@@ -199,9 +199,9 @@ class MaskYOLO:
             'yolo_loss': lambda y_true, y_pred: y_pred}
                                  )
 
-        num_train = 3
-        num_val = 3
-        batch_size = 1
+        num_train = 50
+        num_val = 12
+        batch_size = 5
         self.keras_model.fit_generator(train_generator,
             steps_per_epoch=max(1, num_train//batch_size),
             validation_data=val_generator,
