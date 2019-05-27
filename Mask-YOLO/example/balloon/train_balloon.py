@@ -34,7 +34,14 @@ model = yolo.MaskYOLO(mode="yolo",
                       yolo_pretrain_dir=None,
                       yolo_trainable=True)
 
-model.train(dataset_train, dataset_val, learning_rate=config.LEARNING_RATE, epochs=30, layers='all')
+# model.train(dataset_train, dataset_val, learning_rate=config.LEARNING_RATE, epochs=30, layers='all')
+
+image = cv2.imread('/Users/stark/Mask-YOLOv3/Mask-YOLO/datasets/balloon/train/34020010494_e5cb88e1c4_k.jpg')
+image = cv2.cvtColor(cv2.resize(image, (416, 416)), cv2.COLOR_BGR2RGB)
+
+model.infer_yolo(image, '/Users/stark/Mask-YOLOv3/Mask-YOLO/example/balloon/logs/000/ep099-loss18.591-val_loss33334.621.h5')
+
+
 
 
 ############################################################

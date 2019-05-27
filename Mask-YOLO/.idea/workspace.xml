@@ -14,8 +14,8 @@
       <file leaf-file-name="train_balloon.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/example/balloon/train_balloon.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            <state relative-caret-position="216">
+              <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -26,22 +26,10 @@
       <file leaf-file-name="yolo.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/myolo/yolo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="278" lean-forward="true" selection-start-line="278" selection-end-line="278" />
+            <state relative-caret-position="332">
+              <caret line="290" lean-forward="true" selection-start-line="290" selection-end-line="290" />
               <folding>
                 <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detect.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/myolo/detect.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-              <folding>
-                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -50,8 +38,8 @@
       <file leaf-file-name="utils.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myolo/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="370">
-              <caret line="636" column="14" selection-start-line="636" selection-start-column="14" selection-end-line="636" selection-end-column="14" />
+            <state relative-caret-position="17">
+              <caret line="532" column="18" selection-start-line="532" selection-start-column="18" selection-end-line="532" selection-end-column="18" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -95,8 +83,8 @@
       <file leaf-file-name="visualize.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/myolo/visualize.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="176" selection-start-line="176" selection-end-line="176" />
+            <state relative-caret-position="105">
+              <caret line="99" column="22" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="22" />
               <folding>
                 <element signature="e#177#186#0" expanded="true" />
               </folding>
@@ -115,9 +103,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>myolo_utils</find>
-      <find>utils</find>
-      <find>auto_show</find>
       <find>mutils</find>
       <find>config</find>
       <find>self</find>
@@ -126,7 +111,6 @@
       <find>batch_yolo_target</find>
       <find>grid_y</find>
       <find>anchor</find>
-      <find>BoundBox</find>
       <find>yolo_loss</find>
       <find>prepare</find>
       <find>batch_images</find>
@@ -138,13 +122,17 @@
       <find>y_true</find>
       <find>yolo_head</find>
       <find>BatchGenerator</find>
-      <find>save_path</find>
       <find>print</find>
       <find>1024</find>
       <find>data_generator</find>
       <find>num_train</find>
       <find>log_dir</find>
       <find>load_weights</find>
+      <find>save_path</find>
+      <find>BoundBox</find>
+      <find>_interval_overlap</find>
+      <find>bbox_iou</find>
+      <find>boxes</find>
     </findStrings>
     <replaceStrings>
       <replace>self.config</replace>
@@ -160,11 +148,11 @@
         <option value="$PROJECT_DIR$/utils.py" />
         <option value="$PROJECT_DIR$/myolo/visualize.py" />
         <option value="$PROJECT_DIR$/myolo/model.py" />
-        <option value="$PROJECT_DIR$/example/balloon/train_balloon.py" />
         <option value="$PROJECT_DIR$/example/balloon/dataset_balloon.py" />
         <option value="$PROJECT_DIR$/myolo/config.py" />
-        <option value="$PROJECT_DIR$/myolo/utils.py" />
         <option value="$PROJECT_DIR$/myolo/detect.py" />
+        <option value="$PROJECT_DIR$/example/balloon/train_balloon.py" />
+        <option value="$PROJECT_DIR$/myolo/utils.py" />
         <option value="$PROJECT_DIR$/myolo/yolo.py" />
       </list>
     </option>
@@ -277,10 +265,10 @@
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.2937931" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2937931" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" weight="0.32965517" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -379,16 +367,6 @@
     <entry file="file://$PROJECT_DIR$/datasets/balloon/val/24631331976_defa3bb61f_k.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/myolo/visualize.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="176" selection-start-line="176" selection-end-line="176" />
-          <folding>
-            <element signature="e#177#186#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/myolo/config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1070">
@@ -406,32 +384,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/myolo/model.py">
+    <entry file="file://$PROJECT_DIR$/myolo/visualize.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1861">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        <state relative-caret-position="105">
+          <caret line="99" column="22" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="22" />
           <folding>
-            <element signature="e#39#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example/balloon/train_balloon.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/myolo/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="370">
-          <caret line="636" column="14" selection-start-line="636" selection-start-column="14" selection-end-line="636" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#177#186#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -446,10 +404,43 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/myolo/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1861">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+          <folding>
+            <element signature="e#39#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/myolo/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="532" column="18" selection-start-line="532" selection-start-column="18" selection-end-line="532" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/balloon/InferYOLO.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example/balloon/train_balloon.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/myolo/yolo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="278" lean-forward="true" selection-start-line="278" selection-end-line="278" />
+        <state relative-caret-position="332">
+          <caret line="290" lean-forward="true" selection-start-line="290" selection-end-line="290" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
           </folding>

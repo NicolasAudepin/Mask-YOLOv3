@@ -12,6 +12,9 @@ from keras.optimizers import Adam
 from keras.callbacks import TensorBoard, ModelCheckpoint, ReduceLROnPlateau, EarlyStopping
 from myolo import utils
 from myolo.model import tiny_yolo_body, yolo_loss
+import matplotlib.pyplot as plt
+from myolo import visualize
+import cv2
 
 
 # what's the different between class MaskYOLO(object): and class MaskYOLO:
@@ -94,7 +97,8 @@ class MaskYOLO:
             model_loss = Lambda(yolo_loss, output_shape=(1,), name='yolo_loss',
                                 arguments={'anchors': anchors, 'num_classes': num_classes, 'ignore_thresh': 0.7})(
                 [*model_body.output, *y_true])
-            model = Model([model_body.input, *y_true], model_loss)
+            # model = Model([model_body.input, *y_true], model_loss)
+            model = Model([model_body.input, *y_true], [model_loss, *model_body.output])
 
             return model
 
@@ -180,7 +184,7 @@ class MaskYOLO:
         callbacks = [
             keras.callbacks.TensorBoard(log_dir='./', histogram_freq=0, write_graph=True, write_images=False),
             ModelCheckpoint(self.config.LOG_DIR + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
-                            monitor='val_loss', save_weights_only=True, save_best_only=True, period=3),
+                            monitor='val_loss', save_weights_only=True, save_best_only=True, period=50),
         ]
 
         # Train with frozen layers first, to get a stable loss.
@@ -248,7 +252,7 @@ class MaskYOLO:
         if hasattr(f, 'close'):
             f.close()
 
-    def infer_yolo(self, image, weights_dir, save_path='./img_results/', display=True):
+    def infer_yolo(self, image, weights_dir, save_path='', display=True):
         """ decode yolo output to boxes, confidence score, class label, with visualization.
         :param image: original input image with the same image shape in self.config. single image. dtype=uint8
         :param display: True for visualizing the yolo result on the input image
@@ -258,36 +262,38 @@ class MaskYOLO:
         assert image.dtype == 'uint8'
         assert self.mode == 'yolo'
 
-        now = datetime.datetime.now()
-        tz = timezone('US/Eastern')
-        fmt = '%b-%d-%H-%M'
-        now = tz.localize(now)
+        # now = datetime.datetime.now()
+        # tz = timezone('US/Eastern')
+        # fmt = '%b-%d-%H-%M'
+        # now = tz.localize(now)
 
         normed_image = image / 255.  # normalize the image to 0~1
 
         # form the inputs as model required
         normed_image = np.expand_dims(normed_image, axis=0)
-        dummy_true_boxes = np.zeros((1, 1, 1, 1, self.config.TRUE_BOX_BUFFER, 4))
-
-        dummy_target = np.zeros(shape=[1, self.config.GRID_H, self.config.GRID_W, self.config.N_BOX, 4 + 1 + self.config.NUM_CLASSES])
-
+        dummy_y2 = np.zeros((1, 26, 26, 3, 7))
+        dummy_y1 = np.zeros((1, 13, 13, 3, 7))
+        dummy_y = [dummy_y1, dummy_y2]
         # load weights
         self.load_weights(weights_dir)
 
         # model predict for single input image
-        netout = self.keras_model.predict([normed_image, dummy_true_boxes, dummy_target])[0]
-
+        netout = self.keras_model.predict([normed_image, *dummy_y])
+        # print(netout[0])
+        #
+        # print(netout[1].shape, netout[2].shape)
         # decode network output
-        boxes = utils.decode_one_yolo_output(netout[0],
+        # netout = [loss, y1, y2]
+        boxes = utils.decode_one_yolo_output(netout[1:],
                                               anchors=self.config.ANCHORS,
                                               nms_threshold=0.3,  # for shapes dataset this could be big
                                               obj_threshold=0.35,
-                                              nb_class=self.self.config.NUM_CLASSES)
+                                              nb_class=self.config.NUM_CLASSES)
 
-        normed_image = utils.draw_boxes(normed_image[0], boxes, labels=self.self.config.LABELS)
+        normed_image = utils.draw_boxes(normed_image[0], boxes, labels=self.config.LABELS)
 
         plt.imshow(normed_image[:, :, ::-1])
-        plt.savefig(save_path + 'InferYOLO-' + now.strftime(fmt) + '.png')
+        plt.savefig(save_path + 'InferYOLO.png')
 
     def detect(self, image, weights_dir, save_path='./img_results/', cs_threshold=0.35, display=True):
         """Runs the detection pipeline.
@@ -304,10 +310,10 @@ class MaskYOLO:
         assert image.dtype == 'uint8'
         assert self.mode == 'inference'
 
-        now = datetime.datetime.now()
-        tz = timezone('US/Eastern')
-        fmt = '%b-%d-%H-%M'
-        now = tz.localize(now)
+        # now = datetime.datetime.now()
+        # tz = timezone('US/Eastern')
+        # fmt = '%b-%d-%H-%M'
+        # now = tz.localize(now)
 
         normed_image = image / 255.  # normalize the image to 0~1
 
@@ -455,7 +461,6 @@ class MaskYOLO:
 
         return boxes, class_ids, scores, full_masks
 
-
     def detect_image(self, image):
         start = timer()
 
@@ -531,4 +536,25 @@ class MaskYOLO:
 
     def close_session(self):
         self.sess.close()
+
+
+def draw_boxes(image, boxes, labels):
+    image_h, image_w, _ = image.shape
+
+    for box in boxes:
+        xmin = int(box.xmin * image_w)
+        ymin = int(box.ymin * image_h)
+        xmax = int(box.xmax * image_w)
+        ymax = int(box.ymax * image_h)
+
+        cv2.rectangle(image, (xmin, ymin), (xmax, ymax), (0, 255, 0), 1)
+        cv2.putText(image,
+                    labels[box.get_label()] + ' ' + str(box.get_score()),
+                    (xmin, ymax - 13),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    1.5e-3 * image_h,
+                    (0, 255, 0), 1)
+
+    return image
+
 

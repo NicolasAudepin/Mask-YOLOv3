@@ -385,237 +385,6 @@ def load_image_gt(dataset, config, image_id, augment=False, augmentation=None,
     return image, class_ids, bbox, mask
 
 
-class BoundBox:
-    def __init__(self, xmin, ymin, xmax, ymax, c=None, classes=None):
-        self.xmin = xmin
-        self.ymin = ymin
-        self.xmax = xmax
-        self.ymax = ymax
-
-        self.c = c
-        self.classes = classes
-
-        self.label = -1
-        self.score = -1
-
-    def get_label(self):
-        if self.label == -1:
-            self.label = np.argmax(self.classes)
-
-        return self.label
-
-    def get_score(self):
-        if self.score == -1:
-            self.score = self.classes[self.get_label()]
-
-        return self.score
-
-
-def _interval_overlap(interval_a, interval_b):
-    x1, x2 = interval_a
-    x3, x4 = interval_b
-
-    if x3 < x1:
-        if x4 < x1:
-            return 0
-        else:
-            return min(x2, x4) - x1
-    else:
-        if x2 < x3:
-            return 0
-        else:
-            return min(x2, x4) - x3
-
-
-def bbox_iou(box1, box2):
-    intersect_w = _interval_overlap([box1.xmin, box1.xmax], [box2.xmin, box2.xmax])
-    intersect_h = _interval_overlap([box1.ymin, box1.ymax], [box2.ymin, box2.ymax])
-
-    intersect = intersect_w * intersect_h
-
-    w1, h1 = box1.xmax - box1.xmin, box1.ymax - box1.ymin
-    w2, h2 = box2.xmax - box2.xmin, box2.ymax - box2.ymin
-
-    union = w1 * h1 + w2 * h2 - intersect
-
-    return float(intersect) / union
-
-
-class BatchGenerator(Sequence):
-    def __init__(self,
-                 all_info,
-                 config,
-                 mode,
-                 shuffle=True,
-                 jitter=False,
-                 norm=False):
-
-        # self.generator = None
-        self.config = config
-        self.mode = mode
-        self.all_info = all_info
-        self.shuffle = shuffle
-        self.jitter = jitter
-        self.norm = norm
-
-        assert mode in ['yolo', 'training']
-
-        old_form_anchors = [a for anchor_list in self.config.ANCHORS for a in anchor_list]
-        self.anchors = [BoundBox(0, 0, old_form_anchors[2 * i], old_form_anchors[2 * i + 1]) for i in
-                        range(int(len(old_form_anchors) // 2))]
-
-        if shuffle:
-            np.random.shuffle(self.all_info)   # image, gt_class_ids, gt_boxes, gt_masks
-        # self.images = [item[0] for item in all_info]
-
-    def __len__(self):
-        return int(np.ceil(float(len(self.all_info)) / self.config.BATCH_SIZE))
-
-    def num_classes(self):
-        return self.config.NUM_CLASSES
-
-    def size(self):
-        return len(self.all_info)
-
-    def load_image(self, i):
-        return cv2.imread(self.all_info[i][0])
-
-    def __getitem__(self, idx):
-        l_bound = idx * self.config.BATCH_SIZE
-        r_bound = (idx + 1) * self.config.BATCH_SIZE
-
-        if r_bound > len(self.all_info):
-            r_bound = len(self.all_info)
-            l_bound = max(0, r_bound - self.config.BATCH_SIZE)
-
-        instance_count = 0
-
-        batch_images = np.zeros((r_bound - l_bound,) + (224, 224, 3), dtype=np.float32)
-        batch_yolo_target = np.zeros((r_bound - l_bound, self.config.GRID_H, self.config.GRID_W,
-                                      self.config.N_BOX, 4 + 1 + self.config.NUM_CLASSES))
-
-        batch_yolo_true_boxes = np.zeros((r_bound - l_bound, 1, 1, 1, self.config.TRUE_BOX_BUFFER, 4))
-
-        batch_gt_class_ids = np.zeros((r_bound - l_bound, self.config.TRUE_BOX_BUFFER), dtype=np.int32)
-        batch_gt_boxes = np.zeros((r_bound - l_bound, self.config.TRUE_BOX_BUFFER, 4), dtype=np.int32)
-        batch_gt_masks = np.zeros((r_bound - l_bound, 224, 224,
-                                   self.config.MAX_GT_INSTANCES), dtype=np.bool)
-
-        # x_batch = np.zeros((r_bound - l_bound, self.config.IMAGE_SHAPE[1], self.config.IMAGE_SHAPE[0], 3))  # input images
-        # b_batch = np.zeros((r_bound - l_bound, 1, 1, 1, self.config.TRUE_BOX_BUFFER,
-        #                     4))  # list of self.config['TRUE_self.config['BOX']_BUFFER'] GT boxes
-        # y_batch = np.zeros((r_bound - l_bound, self.config.GRID_H, self.config.GRID_W, self.config.N_BOX,
-        #                     4 + 1 + self.config.NUM_CLASSES))  # desired network output
-
-        for train_instance in self.all_info[l_bound:r_bound]:
-
-            image = train_instance[0]
-            gt_class_ids = train_instance[1]
-            gt_boxes = train_instance[2]
-            gt_masks = train_instance[3]
-
-            # If more instances than fits in the array, sub-sample from them.
-            if gt_boxes.shape[0] > self.config.TRUE_BOX_BUFFER:
-                print('find instances more than ' + str(self.config.TRUE_BOX_BUFFER) + ' in an image')
-                ids = np.random.choice(
-                    np.arange(gt_boxes.shape[0]), self.config.TRUE_BOX_BUFFER, replace=False)
-                gt_class_ids = gt_class_ids[ids]
-                gt_boxes = gt_boxes[ids]
-                gt_masks = gt_masks[:, :, ids]
-
-            ### YOLO
-            true_box_index = 0
-            for i in range(0, gt_boxes.shape[0]):
-                # gt_boxes: [instance, (x1, y1, x2, y2)]
-                xmin = gt_boxes[i][0]
-                ymin = gt_boxes[i][1]
-                xmax = gt_boxes[i][2]
-                ymax = gt_boxes[i][3]
-
-                center_x = .5 * (xmin + xmax)
-                center_x = center_x / (float(self.config.IMAGE_SHAPE[0]) / self.config.GRID_W)
-                center_y = .5 * (ymin + ymax)
-                center_y = center_y / (float(self.config.IMAGE_SHAPE[1]) / self.config.GRID_H)
-
-                grid_x = int(np.floor(center_x))
-                grid_y = int(np.floor(center_y))
-
-                if grid_x < self.config.GRID_W and grid_y < self.config.GRID_H:
-                    obj_indx = gt_class_ids[i]
-
-                    center_w = (xmax - xmin) / (float(self.config.IMAGE_SHAPE[0]) / self.config.GRID_W)
-                    center_h = (ymax - ymin) / (float(self.config.IMAGE_SHAPE[1]) / self.config.GRID_H)
-
-                    yolo_box = [center_x, center_y, center_w, center_h]
-
-                    # find the anchor that best predicts this box
-                    best_anchor = -1
-                    max_iou = -1
-
-                    shifted_box = BoundBox(0,
-                                           0,
-                                           center_w,
-                                           center_h)
-
-                    for j in range(0, len(self.anchors)):
-                        anchor = self.anchors[j]
-                        iou = bbox_iou(shifted_box, anchor)
-
-                        if max_iou < iou:
-                            best_anchor = j
-                            max_iou = iou
-
-                    # assign ground truth x, y, w, h, confidence and class probs to y_batch
-                    batch_yolo_target[instance_count, grid_y, grid_x, best_anchor, 0:4] = yolo_box
-                    batch_yolo_target[instance_count, grid_y, grid_x, best_anchor, 4] = 1.
-                    batch_yolo_target[instance_count, grid_y, grid_x, best_anchor, 5 + obj_indx] = 1
-                    # assign the true box to b_batch
-                    batch_yolo_true_boxes[instance_count, 0, 0, 0, true_box_index] = yolo_box
-
-                    true_box_index += 1
-                    true_box_index = true_box_index % self.config.TRUE_BOX_BUFFER
-
-            # assign input image to x_batch
-            if self.norm:
-                batch_images[instance_count] = image / 255.
-            else:
-                # plot image and bounding boxes for sanity check
-                img = image[:, :, ::-1].astype(np.uint8).copy()
-                for i in range(0, gt_boxes.shape[0]):
-                    # if obj['xmax'] > obj['xmin'] and obj['ymax'] > obj['ymin']:
-                    if train_instance[2][i][2] > train_instance[2][i][0] \
-                            and train_instance[2][i][3] > train_instance[2][i][1]:
-                        cv2.rectangle(img, (gt_boxes[i][0], gt_boxes[i][1]),
-                                      (gt_boxes[i][2], gt_boxes[i][3]),
-                                      (255, 0, 0), 2)
-                        cv2.putText(img, str(gt_class_ids[i]),
-                                    (gt_boxes[i][0] + 2, gt_boxes[i][1] + 12),
-                                    0, 1.2e-3 * image.shape[0],
-                                    (0, 255, 0), 1)
-
-                batch_images[instance_count] = img
-
-            batch_gt_class_ids[instance_count, :gt_class_ids.shape[0]] = gt_class_ids
-            batch_gt_boxes[instance_count, :gt_boxes.shape[0]] = gt_boxes
-            batch_gt_masks[instance_count, :, :, :gt_masks.shape[-1]] = gt_masks
-
-            # increase instance counter in current batch
-            instance_count += 1
-
-        if self.mode == 'yolo':
-            inputs = [batch_images, batch_yolo_true_boxes, batch_yolo_target]
-            outputs = []
-        elif self.mode == 'training':
-            inputs = [batch_images, batch_yolo_true_boxes, batch_yolo_target,
-                      batch_gt_class_ids, batch_gt_boxes, batch_gt_masks]
-            outputs = []
-        else:
-            raise NotImplementedError
-
-        # return [x_batch, b_batch], y_batch
-        return inputs, outputs
-
-
 def data_generator(data_info, batch_size, config):
     '''data generator for fit_generator'''
     while True:
@@ -711,3 +480,116 @@ def preprocess_true_boxes(true_boxes, config):
                     y_true[l][b, j, i, k, 5 + c] = 1
 
     return y_true
+
+
+class BoundBox:
+    def __init__(self, xmin, ymin, xmax, ymax, c=None, classes=None):
+        self.xmin = xmin
+        self.ymin = ymin
+        self.xmax = xmax
+        self.ymax = ymax
+
+        self.c = c
+        self.classes = classes
+
+        self.label = -1
+        self.score = -1
+
+    def get_label(self):
+        if self.label == -1:
+            self.label = np.argmax(self.classes)
+
+        return self.label
+
+    def get_score(self):
+        if self.score == -1:
+            self.score = self.classes[self.get_label()]
+
+        return self.score
+
+
+def _sigmoid(x):
+    return 1. / (1. + np.exp(-x))
+
+
+def _softmax(x, axis=-1, t=-100.):
+    x = x - np.max(x)
+
+    if np.min(x) < t:
+        x = x / np.min(x) * t
+
+    e_x = np.exp(x)
+
+    return e_x / e_x.sum(axis, keepdims=True)
+
+
+def decode_one_yolo_output(netoutlist, anchors, nb_class, obj_threshold=0.3, nms_threshold=0.3):
+    boxes = []
+    for netout in netoutlist:
+        grid_h, grid_w, nb_box = netout.shape[:3]
+
+        # decode the output by the network
+        netout[..., 4] = _sigmoid(netout[..., 4])
+        netout[..., 5:] = netout[..., 4][..., np.newaxis] * _softmax(netout[..., 5:])
+        netout[..., 5:] *= netout[..., 5:] > obj_threshold
+
+        for row in range(grid_h):
+            for col in range(grid_w):
+                for b in range(nb_box):
+                    # from 4th element onwards are confidence and class classes
+                    classes = netout[row, col, b, 5:]
+
+                    if np.sum(classes) > 0:
+                        # first 4 elements are x, y, w, and h
+                        x, y, w, h = netout[row, col, b, :4]
+
+                        x = (col + _sigmoid(x)) / grid_w  # center position, unit: image width
+                        y = (row + _sigmoid(y)) / grid_h  # center position, unit: image height
+                        w = anchors[2 * b + 0] * np.exp(w) / grid_w  # unit: image width
+                        h = anchors[2 * b + 1] * np.exp(h) / grid_h  # unit: image height
+                        confidence = netout[row, col, b, 4]
+
+                        box = BoundBox(x - w / 2, y - h / 2, x + w / 2, y + h / 2, confidence, classes)
+
+                        boxes.append(box)
+
+    # suppress non-maximal boxes
+    for c in range(nb_class):
+        sorted_indices = list(reversed(np.argsort([box.classes[c] for box in boxes])))
+
+        for i in range(len(sorted_indices)):
+            index_i = sorted_indices[i]
+
+            if boxes[index_i].classes[c] == 0:
+                continue
+            else:
+                for j in range(i + 1, len(sorted_indices)):
+                    index_j = sorted_indices[j]
+
+                    if bbox_iou(boxes[index_i], boxes[index_j]) >= nms_threshold:
+                        boxes[index_j].classes[c] = 0
+
+    # remove the boxes which are less likely than a obj_threshold
+    boxes = [box for box in boxes if box.get_score() > obj_threshold]
+
+    return boxes
+
+
+def draw_boxes(image, boxes, labels):
+    image_h, image_w, _ = image.shape
+
+    for box in boxes:
+        xmin = int(box.xmin * image_w)
+        ymin = int(box.ymin * image_h)
+        xmax = int(box.xmax * image_w)
+        ymax = int(box.ymax * image_h)
+
+        cv2.rectangle(image, (xmin, ymin), (xmax, ymax), (0, 255, 0), 1)
+        cv2.putText(image,
+                    labels[box.get_label()] + ' ' + str(box.get_score()),
+                    (xmin, ymax - 13),
+                    cv2.FONT_HERSHEY_SIMPLEX,
+                    1.5e-3 * image_h,
+                    (0, 255, 0), 1)
+
+    return image
