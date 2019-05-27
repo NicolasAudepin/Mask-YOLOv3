@@ -206,10 +206,21 @@ class MaskYOLO:
             steps_per_epoch=max(1, num_train//batch_size),
             validation_data=val_generator,
             validation_steps=max(1, num_val//batch_size),
-            epochs=100,
+            epochs=50,
             initial_epoch=0,
             callbacks=callbacks)
-        self.epoch = max(self.epoch, epochs)
+
+        num_train = 50
+        num_val = 12
+        batch_size = 5
+        self.keras_model.fit_generator(train_generator,
+            steps_per_epoch=max(1, num_train//batch_size),
+            validation_data=val_generator,
+            validation_steps=max(1, num_val//batch_size),
+            epochs=100,
+            initial_epoch=50,
+            callbacks=callbacks)
+        self.keras_model.save_weights(self.config.LOG_DIR + 'trained_weights_final.h5')
 
     def load_weights(self, filepath, by_name=False, exclude=None):
         """Modified version of the corresponding Keras function with

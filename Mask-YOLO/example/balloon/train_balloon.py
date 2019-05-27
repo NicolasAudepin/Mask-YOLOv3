@@ -29,7 +29,6 @@ dataset_val.load_balloon(balloon_DIR, "val")
 dataset_val.prepare()
 
 
-
 model = yolo.MaskYOLO(mode="yolo",
                       model_dir="/Users/stark/Mask-YOLOv3/Mask-YOLO/model_data/yolo-tiny.h5",
                       config=config,
