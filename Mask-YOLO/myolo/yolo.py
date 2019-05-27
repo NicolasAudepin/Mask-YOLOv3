@@ -209,7 +209,11 @@ class MaskYOLO:
             epochs=50,
             initial_epoch=0,
             callbacks=callbacks)
-
+        self.keras_model.save_weights(self.config.LOG_DIR + 'trained_weights_stage_1.h5')
+        for i in range(len(self.keras_model.layers)):
+            self.keras_model.layers[i].trainable = True
+        self.keras_model.compile(optimizer=Adam(lr=1e-4), loss={'yolo_loss': lambda y_true, y_pred: y_pred}) # recompile to apply the change
+        print('Unfreeze all of the layers.')
         num_train = 50
         num_val = 12
         batch_size = 5
