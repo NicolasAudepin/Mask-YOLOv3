@@ -24,12 +24,14 @@ class Config(object):
     # experiment is running.
     NAME = None  # Override in sub-classes
 
-    ANCHORS = [[10., 14.],
+    NUM_CLASSES = 80
+
+    ANCHORS = np.array([[10., 14.],
                [23., 27.],
                [37., 58.],
                [81., 82.],
                [135., 169.],
-               [344., 319.]]
+               [344., 319.]])
 
     LOG_DIR = 'logs/000/'
 

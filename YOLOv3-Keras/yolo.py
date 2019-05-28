@@ -21,7 +21,7 @@ from keras.utils import multi_gpu_model
 
 class YOLO(object):
     _defaults = {
-        "model_path": 'model_data/test.h5',
+        "model_path": 'model_data/yolo-tiny.h5',
         # "model_path": 'model_data/yolo-tiny.h5',
         "anchors_path": 'model_data/tiny_yolo_anchors.txt',
         "classes_path": 'model_data/coco_classes.txt',
@@ -77,10 +77,6 @@ class YOLO(object):
             assert self.yolo_model.layers[-1].output_shape[-1] == \
                 num_anchors/len(self.yolo_model.output) * (num_classes + 5), \
                 'Mismatch between model and given anchor and class sizes'
-
-        # print(self.yolo_model.summary())
-        # print(self.yolo_model.layers[152])
-        # print(self.yolo_model.layers[92])
 
         print('{} model, anchors, and classes loaded.'.format(model_path))
 

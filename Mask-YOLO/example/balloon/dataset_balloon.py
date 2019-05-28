@@ -123,7 +123,7 @@ class BalloonDataset(Dataset):
         annotations = [a for a in annotations if a['regions']]
 
         # Add images
-        for a in annotations:
+        for a in annotations[:5]:
             # Get the x, y coordinaets of points of the polygons that make up
             # the outline of each object instance. There are stores in the
             # shape_attributes (see json format above)

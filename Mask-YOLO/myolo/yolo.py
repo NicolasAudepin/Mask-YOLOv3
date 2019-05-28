@@ -5,9 +5,10 @@ import re
 import numpy as np
 import keras
 import tensorflow as tf
-import keras.backend as K
+from keras import backend as K
 from keras.layers import Input, Lambda
 from keras.models import Model
+from keras.models import load_model
 from keras.optimizers import Adam
 from keras.callbacks import TensorBoard, ModelCheckpoint, ReduceLROnPlateau, EarlyStopping
 from myolo import utils
@@ -15,6 +16,9 @@ from myolo.model import tiny_yolo_body, yolo_loss
 import matplotlib.pyplot as plt
 from myolo import visualize
 import cv2
+import colorsys
+from timeit import default_timer as timer
+from PIL import Image, ImageFont, ImageDraw
 
 
 # what's the different between class MaskYOLO(object): and class MaskYOLO:
@@ -26,6 +30,7 @@ class MaskYOLO:
 
     _defaults = {
         "model_path": 'model_data/yolo.h5',
+        "yolo_weights_path": '/model_data/trained_weights_final.h5',
         "anchors_path": 'model_data/yolo_anchors.txt',
         "classes_path": 'model_data/coco_classes.txt',
         "score" : 0.3,
@@ -37,7 +42,7 @@ class MaskYOLO:
     def __init__(self,
                  mode,
                  config,
-                 model_dir=None,
+                 weights_path=None,
                  yolo_pretrain_dir=None,
                  yolo_trainable=True):
         """
@@ -45,33 +50,39 @@ class MaskYOLO:
         self.config: A Sub-class of the Config class
         model_dir: Directory to save training logs and trained weights
         """
-        assert mode in ['training', 'inference', 'yolo']
+        assert mode in ['yolo_train', 'yolo_detect', 'yolo']
         self.mode = mode
         self.config = config
-        self.model_dir = model_dir
-        # self.weights_path = weights_path
+        self.weights_path = weights_path
         self.yolo_pretrain_dir = yolo_pretrain_dir
         self.yolo_trainable = yolo_trainable
+
         # self.keras_model = self.build(mode=mode, self.config=self.config)
-        self.keras_model = self.build(mode=mode)
+        if self.mode == "yolo_train":
+            self.keras_model = self.build(mode=mode)
+        elif self.mode == "yolo_detect":
+            self.sess = K.get_session()
+            self.boxes, self.scores, self.classes = self.build(mode=mode)
+        self.score = 0.3
+        self.iou = 0.45
         self.epoch = 0
+        self.model_image_size = (416, 416)
 
         # TODO freeze_body need be clear
+        # TODO load_pretrained need be flexible
     def build(self, mode, load_pretrained=True, freeze_body=2):
         '''create the training model, for Tiny YOLOv3'''
-        K.clear_session()  # get a new session
-        image_input = Input(shape=(None, None, 3))
-
-        h, w = self.config.INPUT_SHAPE
-
-        weights_path = self.model_dir
 
         # TODO
         anchors = np.array(self.config.ANCHORS)
         num_classes = self.config.NUM_CLASSES
         num_anchors = len(anchors)
 
-        if mode == 'yolo':
+        if mode == 'yolo_train':
+            K.clear_session()  # get a new session
+            image_input = Input(shape=(None, None, 3))
+
+            h, w = self.config.INPUT_SHAPE
             # tiny yolo have two output y1, y2. input image after 32x down sample
             # to get y1, so y1's shape = input.shape // 32
             # the same way to get y2's shape below.
@@ -86,8 +97,8 @@ class MaskYOLO:
             print('Create Tiny YOLOv3 model with {} anchors and {} classes.'.format(num_anchors, num_classes))
 
             if load_pretrained:
-                model_body.load_weights(weights_path, by_name=True, skip_mismatch=True)
-                print('Load weights {}.'.format(weights_path))
+                model_body.load_weights(self.weights_path, by_name=True, skip_mismatch=True)
+                print('Load weights {}.'.format(self.weights_path))
                 if freeze_body in [1, 2]:
                     # Freeze the darknet body or freeze all but 2 output layers.
                     num = (20, len(model_body.layers) - 2)[freeze_body - 1]
@@ -97,12 +108,54 @@ class MaskYOLO:
             model_loss = Lambda(yolo_loss, output_shape=(1,), name='yolo_loss',
                                 arguments={'anchors': anchors, 'num_classes': num_classes, 'ignore_thresh': 0.7})(
                 [*model_body.output, *y_true])
-            # model = Model([model_body.input, *y_true], model_loss)
-            model = Model([model_body.input, *y_true], [model_loss, *model_body.output])
-
+            model = Model([model_body.input, *y_true], model_loss)
+            # model = Model([model_body.input, *y_true], [model_loss, *model_body.output])
             return model
+        elif mode == "yolo_detect":
+            print("build mode is yolo_detect mode.")
+            model_path = os.path.expanduser(self.weights_path)
+            assert model_path.endswith('.h5'), 'Keras model or weights must be a .h5 file.'
 
-    def train(self, train_dataset, val_dataset, learning_rate, epochs, layers,
+            # Load model, or construct model and load weights.
+            # is_tiny_version = num_anchors == 6  # default setting
+            try:
+                self.yolo_model = load_model(model_path, compile=False)
+            except:
+                self.yolo_model = tiny_yolo_body(Input(shape=(None, None, 3)), num_anchors // 2, num_classes)
+                self.yolo_model.load_weights(self.model_path)  # make sure model, anchors and classes match
+            else:
+                assert self.yolo_model.layers[-1].output_shape[-1] == \
+                       num_anchors / len(self.yolo_model.output) * (num_classes + 5), \
+                    'Mismatch between model and given anchor and class sizes'
+            assert self.yolo_model.layers[-1].output_shape[-1] == \
+                   num_anchors / len(self.yolo_model.output) * (num_classes + 5), \
+                'Mismatch between model and given anchor and class sizes'
+
+            print('{} model, anchors, and classes loaded.'.format(model_path))
+
+            # Generate colors for drawing bounding boxes.
+            hsv_tuples = [(x / self.config.NUM_CLASSES, 1., 1.)
+                          for x in range(self.config.NUM_CLASSES)]
+            self.colors = list(map(lambda x: colorsys.hsv_to_rgb(*x), hsv_tuples))
+            self.colors = list(
+                map(lambda x: (int(x[0] * 255), int(x[1] * 255), int(x[2] * 255)),
+                    self.colors))
+            np.random.seed(10101)  # Fixed seed for consistent colors across runs.
+            np.random.shuffle(self.colors)  # Shuffle colors to decorrelate adjacent classes.
+            np.random.seed(None)  # Reset seed to default.
+
+            # Generate output tensor targets for filtered bounding boxes.
+            self.input_image_shape = K.placeholder(shape=(2,))
+
+            # 这里yolo_eval输入卷积层的输出，从中得出boxes, scores, classes。
+
+            boxes, scores, classes = utils.yolo_eval(self.yolo_model.output, self.config.ANCHORS,
+                                               self.config.NUM_CLASSES, self.input_image_shape,
+                                               score_threshold=0.3, iou_threshold=0.45)
+            print("yolo detect mode bulid finnished!")
+            return boxes, scores, classes
+
+    def train(self, train_dataset, val_dataset, learning_rate,
               augmentation=None, custom_callbacks=None, no_augmentation_sources=None):
         """Train the model.
         train_dataset, val_dataset: Training and validation Dataset objects.
@@ -151,30 +204,30 @@ class MaskYOLO:
         # }
         # if layers in layer_regex.keys():
         #     layers = layer_regex[layers]
-
+        num_train = 5
+        batch_size = 5
         # Data generators
         train_info = []
-        for id in range(0, 50):
+        for id in range(num_train):
             image, gt_class_ids, gt_boxes, gt_masks = \
                 utils.load_image_gt(train_dataset, self.config, id,
                                      use_mini_mask=self.config.USE_MINI_MASK)
             train_info.append([image, gt_class_ids, gt_boxes, gt_masks])
 
-        val_info = []
-        for id in range(0, 10):
-            image, gt_class_ids, gt_boxes, gt_masks = \
-                utils.load_image_gt(val_dataset, self.config, id,
-                                     use_mini_mask=self.config.USE_MINI_MASK)
-            val_info.append([image, gt_class_ids, gt_boxes, gt_masks])
-
+        # val_info = []
+        # for id in range(0, 10):
+        #     image, gt_class_ids, gt_boxes, gt_masks = \
+        #         utils.load_image_gt(val_dataset, self.config, id,
+        #                              use_mini_mask=self.config.USE_MINI_MASK)
+        #     val_info.append([image, gt_class_ids, gt_boxes, gt_masks])
         # train_generator = utils.BatchGenerator(train_info, self.config, mode=self.mode,
         #                                         shuffle=True, jitter=False, norm=True)
 
         # val_generator = utils.BatchGenerator(val_info, self.config, mode=self.mode,
         #                                       shuffle=True, jitter=False, norm=True)
 
-        train_generator = utils.data_generator(train_info, 50, self.config)
-        val_generator = utils.data_generator(val_info, 10, self.config)
+        train_generator = utils.data_generator(train_info, batch_size=batch_size, config=self.config)
+#        val_generator = utils.data_generator(val_info, 10, self.config)
 
         # Create log_dir if it does not exist
         if not os.path.exists(self.config.LOG_DIR):
@@ -183,8 +236,10 @@ class MaskYOLO:
         # Callbacks
         callbacks = [
             keras.callbacks.TensorBoard(log_dir='./', histogram_freq=0, write_graph=True, write_images=False),
+            # ModelCheckpoint(self.config.LOG_DIR + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
+            #                 monitor='val_loss', save_weights_only=True, save_best_only=True, period=50),
             ModelCheckpoint(self.config.LOG_DIR + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
-                            monitor='val_loss', save_weights_only=True, save_best_only=True, period=50),
+                            save_weights_only=True, save_best_only=True, period=50),
         ]
 
         # Train with frozen layers first, to get a stable loss.
@@ -198,32 +253,31 @@ class MaskYOLO:
             # use custom yolo_loss Lambda layer.
             'yolo_loss': lambda y_true, y_pred: y_pred}
                                  )
-
-        num_train = 50
         num_val = 12
-        batch_size = 5
+
         self.keras_model.fit_generator(train_generator,
             steps_per_epoch=max(1, num_train//batch_size),
-            validation_data=val_generator,
-            validation_steps=max(1, num_val//batch_size),
+            # validation_data=val_generator,
+            # validation_steps=max(1, num_val//batch_size),
             epochs=50,
             initial_epoch=0,
-            callbacks=callbacks)
+            # callbacks=callbacks
+                                       )
         self.keras_model.save_weights(self.config.LOG_DIR + 'trained_weights_stage_1.h5')
         for i in range(len(self.keras_model.layers)):
             self.keras_model.layers[i].trainable = True
         self.keras_model.compile(optimizer=Adam(lr=1e-4), loss={'yolo_loss': lambda y_true, y_pred: y_pred}) # recompile to apply the change
         print('Unfreeze all of the layers.')
-        num_train = 50
         num_val = 12
-        batch_size = 5
+
         self.keras_model.fit_generator(train_generator,
             steps_per_epoch=max(1, num_train//batch_size),
-            validation_data=val_generator,
-            validation_steps=max(1, num_val//batch_size),
+            # validation_data=val_generator,
+            # validation_steps=max(1, num_val//batch_size),
             epochs=100,
             initial_epoch=50,
-            callbacks=callbacks)
+            # callbacks=callbacks
+                                       )
         self.keras_model.save_weights(self.config.LOG_DIR + 'trained_weights_final.h5')
 
     def load_weights(self, filepath, by_name=False, exclude=None):
@@ -310,108 +364,6 @@ class MaskYOLO:
         plt.imshow(normed_image[:, :, ::-1])
         plt.savefig(save_path + 'InferYOLO.png')
 
-    def detect(self, image, weights_dir, save_path='./img_results/', cs_threshold=0.35, display=True):
-        """Runs the detection pipeline.
-
-        images: List of images, potentially of different sizes.
-
-        Returns a list of dicts, one dict per image. The dict contains:
-        rois: [N, (y1, x1, y2, x2)] detection bounding boxes
-        class_ids: [N] int class IDs
-        scores: [N] float probability scores for the class IDs
-        masks: [H, W, N] instance binary masks
-        """
-        assert list(image.shape) == self.config.IMAGE_SHAPE
-        assert image.dtype == 'uint8'
-        assert self.mode == 'inference'
-
-        # now = datetime.datetime.now()
-        # tz = timezone('US/Eastern')
-        # fmt = '%b-%d-%H-%M'
-        # now = tz.localize(now)
-
-        normed_image = image / 255.  # normalize the image to 0~1
-
-        # form the inputs as model required
-        normed_image = np.expand_dims(normed_image, axis=0)
-        dummy_true_boxes = np.zeros((1, 1, 1, 1, self.config.TRUE_BOX_BUFFER, 4))
-        # dummy_true_boxes' shape is (1, 1, 1, 1, 10, 4)
-
-        # load weights
-        self.load_weights(weights_dir)
-
-        # model predict for single input image
-        self.config.BATCH_SIZE = 1
-        yolo_output, detections, myolo_mask = self.keras_model.predict([normed_image, dummy_true_boxes], verbose=0)
-        # yolo_output = (1, 7, 7, 5, 7)
-        # detections = (1, 245, 6)
-        # myolo_mask = (1, 245, 28, 28, 2)
-        # 245 = 7*7*5
-        # test if detections align with results of yolo_output
-        for detection in detections[0]:
-            # print("score is ", detection[4])
-            if detection[4] >= cs_threshold:
-                print(detection)
-
-        # decode network output
-        yolo_boxes = utils.decode_one_yolo_output(yolo_output[0],
-                                                   anchors=self.config.ANCHORS,
-                                                   nms_threshold=0.3,  # for shapes dataset this could be big
-                                                   obj_threshold=0.2,
-                                                   nb_class=self.self.config.NUM_CLASSES)
-        # print(yolo_output)
-        # if display:
-        #     image = utils.draw_boxes(image, yolo_boxes, labels=self.self.config.LABELS)
-        #     plt.imshow(image)
-        #     plt.show()
-
-        # Decode masks
-        results = []
-        boxes, class_ids, scores, full_masks = self.decode_masks(detections, myolo_mask, image.shape)
-
-        top10_indices = np.argsort(scores)[::-1][:10]
-        # print(top10_indices)
-        # print(boxes[top10_indices])
-        # if display:
-        #     image = utils.draw_boxes(image, boxes[top10_indices], labels=self.self.config.LABELS)
-        #     plt.imshow(image)
-        #     plt.show()
-        list_to_remove = []
-        for index in top10_indices:
-            if scores[index] < cs_threshold:
-                list_to_remove.append(np.where(top10_indices == index)[0][0])
-        removed_indices = np.delete(top10_indices, list_to_remove)
-
-        boxes_temp = boxes[removed_indices]
-        class_ids_temp = class_ids[removed_indices]
-        # scores = scores[removed_indices]
-        # full_masks = full_masks[removed_indices]
-
-        nmb_indices = utils.NMB(boxes_temp, class_ids_temp, removed_indices, self.config.IMAGE_SHAPE, nms_threshold=0.7)
-        # bug in here
-        nmb_indices = top10_indices
-        boxes = np.array([i * 224 for i in boxes[nmb_indices]])
-        class_ids = class_ids[nmb_indices]
-        scores = scores[nmb_indices]
-        full_masks = full_masks[:, :, nmb_indices]
-
-        # for i in range(0, full_masks.shape[-1]):
-        #     full_masks[:, :, i] = np.transpose(full_masks[:, :, i])
-        #     full_masks[:, :, i] = np.rot90(full_masks[:, :, i], 3)
-
-        results.append({
-            "bboxes": boxes,
-            "class_ids": class_ids,
-            "confidence_scores": scores,
-            "full_masks": full_masks,
-        })
-
-        save_path += 'InferMaskYOLO-' + now.strftime(fmt) + '.png'
-
-        if display:
-            visualize.display_instances(image, boxes, full_masks, class_ids, self.config.LABELS, scores, save_path)
-
-        return results
 
     def decode_masks(self, detections, myolo_mask, image_shape):
         """Reformats the detections of one image from the format of the neural
@@ -479,14 +431,15 @@ class MaskYOLO:
     def detect_image(self, image):
         start = timer()
 
-        if self.model_image_size != (None, None):
+        # TODO self.config.INPUTSHAPE = (416, 416)
+        if (416, 416) != (None, None):
             assert self.model_image_size[0]%32 == 0, 'Multiples of 32 required'
             assert self.model_image_size[1]%32 == 0, 'Multiples of 32 required'
-            boxed_image = letterbox_image(image, tuple(reversed(self.model_image_size)))
+            boxed_image = utils.letterbox_image(image, tuple(reversed(self.model_image_size)))
         else:
             new_image_size = (image.width - (image.width % 32),
                               image.height - (image.height % 32))
-            boxed_image = letterbox_image(image, new_image_size)
+            boxed_image = utils.letterbox_image(image, new_image_size)
         image_data = np.array(boxed_image, dtype='float32')
 
         # print(image_data.shape)
@@ -514,7 +467,7 @@ class MaskYOLO:
         thickness = (image.size[0] + image.size[1]) // 300
 
         for i, c in reversed(list(enumerate(out_classes))):
-            predicted_class = self.class_names[c]
+            predicted_class = self.config.LABELS[c]
             box = out_boxes[i]
             score = out_scores[i]
 
