@@ -390,15 +390,20 @@ def load_image_gt(dataset, config, image_id, augment=False, augmentation=None,
 
 def data_generator(data_info, batch_size, config):
     '''data generator for fit_generator'''
+    n = len(data_info)
+    i = 0
     while True:
         image_data = []
         box_data = []
-        for data in data_info:
+        for b in range(batch_size):
+            if i == 0:
+                np.random.shuffle(data_info)
             box = np.zeros((20, 5))
-            image, single_box = data[0], np.concatenate((data[2], data[1].reshape(len(data[1]), 1)), axis=1)
+            image, single_box = data_info[i][0], np.concatenate((data_info[i][2], data_info[i][1].reshape(len(data_info[i][1]), 1)), axis=1)
             box[:len(single_box)] = single_box
             image_data.append(image)
             box_data.append(list(box))
+            i = (i + 1) % n
 
         image_data = np.array(image_data)
         box_data = np.array(box_data)

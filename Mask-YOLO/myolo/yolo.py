@@ -122,7 +122,7 @@ class MaskYOLO:
                 self.yolo_model = load_model(model_path, compile=False)
             except:
                 self.yolo_model = tiny_yolo_body(Input(shape=(None, None, 3)), num_anchors // 2, num_classes)
-                self.yolo_model.load_weights(self.model_path)  # make sure model, anchors and classes match
+                self.yolo_model.load_weights(model_path)  # make sure model, anchors and classes match
             else:
                 assert self.yolo_model.layers[-1].output_shape[-1] == \
                        num_anchors / len(self.yolo_model.output) * (num_classes + 5), \
@@ -155,7 +155,7 @@ class MaskYOLO:
             print("yolo detect mode bulid finnished!")
             return boxes, scores, classes
 
-    def train(self, train_dataset, val_dataset, learning_rate,
+    def train(self, train_dataset, val_dataset, learning_rate, num_train, batch_size,
               augmentation=None, custom_callbacks=None, no_augmentation_sources=None):
         """Train the model.
         train_dataset, val_dataset: Training and validation Dataset objects.
@@ -204,8 +204,8 @@ class MaskYOLO:
         # }
         # if layers in layer_regex.keys():
         #     layers = layer_regex[layers]
-        num_train = 5
-        batch_size = 5
+
+
         # Data generators
         train_info = []
         for id in range(num_train):
@@ -227,7 +227,7 @@ class MaskYOLO:
         #                                       shuffle=True, jitter=False, norm=True)
 
         train_generator = utils.data_generator(train_info, batch_size=batch_size, config=self.config)
-#        val_generator = utils.data_generator(val_info, 10, self.config)
+        # val_generator = utils.data_generator(val_info, 10, self.config)
 
         # Create log_dir if it does not exist
         if not os.path.exists(self.config.LOG_DIR):
@@ -256,7 +256,7 @@ class MaskYOLO:
         num_val = 12
 
         self.keras_model.fit_generator(train_generator,
-            steps_per_epoch=max(1, num_train//batch_size),
+            steps_per_epoch=5,
             # validation_data=val_generator,
             # validation_steps=max(1, num_val//batch_size),
             epochs=50,
@@ -274,7 +274,7 @@ class MaskYOLO:
             steps_per_epoch=max(1, num_train//batch_size),
             # validation_data=val_generator,
             # validation_steps=max(1, num_val//batch_size),
-            epochs=100,
+            epochs=500,
             initial_epoch=50,
             # callbacks=callbacks
                                        )

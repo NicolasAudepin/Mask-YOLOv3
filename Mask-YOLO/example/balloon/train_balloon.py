@@ -35,7 +35,7 @@ model = yolo.MaskYOLO(mode="yolo_train",
                       yolo_pretrain_dir=None,
                       yolo_trainable=True)
 
-model.train(dataset_train, dataset_val, learning_rate=config.LEARNING_RATE)
+model.train(dataset_train, dataset_val, num_train=50, batch_size=5, learning_rate=config.LEARNING_RATE)
 
 # image = cv2.imread('/Users/stark/Mask-YOLOv3/Mask-YOLO/datasets/balloon/train/34020010494_e5cb88e1c4_k.jpg')
 # image = cv2.cvtColor(cv2.resize(image, (416, 416)), cv2.COLOR_BGR2RGB)

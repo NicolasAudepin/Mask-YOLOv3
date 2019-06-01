@@ -78,7 +78,7 @@ class BalloonConfig(Config):
     # handle 2 images of 1024x1024px.
     # Adjust based on your GPU memory and image sizes. Use the highest
     # number that your GPU can handle for best performance.
-    IMAGES_PER_GPU = 2
+
 
     # BATCH_SIZE = 1
 
@@ -123,7 +123,7 @@ class BalloonDataset(Dataset):
         annotations = [a for a in annotations if a['regions']]
 
         # Add images
-        for a in annotations[:5]:
+        for a in annotations:
             # Get the x, y coordinaets of points of the polygons that make up
             # the outline of each object instance. There are stores in the
             # shape_attributes (see json format above)
