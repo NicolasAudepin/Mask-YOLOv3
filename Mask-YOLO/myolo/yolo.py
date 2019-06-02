@@ -155,7 +155,7 @@ class MaskYOLO:
             print("yolo detect mode bulid finnished!")
             return boxes, scores, classes
 
-    def train(self, train_dataset, val_dataset, learning_rate, num_train, batch_size,
+    def train(self, train_dataset, val_dataset, num_train, batch_size,
               stage1epochs, stage2epochs):
         """Train the model.
         train_dataset, val_dataset: Training and validation Dataset objects.
