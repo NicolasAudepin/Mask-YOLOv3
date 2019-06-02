@@ -700,14 +700,13 @@ def decode_one_yolo_output(netoutlist, anchors, nb_class, obj_threshold=0.3, nms
 
                         x = (col + _sigmoid(x)) / grid_w  # center position, unit: image width
                         y = (row + _sigmoid(y)) / grid_h  # center position, unit: image height
-                        w = anchors[2 * b + 0] * np.exp(w) / grid_w  # unit: image width
-                        h = anchors[2 * b + 1] * np.exp(h) / grid_h  # unit: image height
+                        w = anchors[b][0] * np.exp(w) / grid_w  # unit: image width
+                        h = anchors[b][1] * np.exp(h) / grid_h  # unit: image height
                         confidence = netout[row, col, b, 4]
 
                         box = BoundBox(x - w / 2, y - h / 2, x + w / 2, y + h / 2, confidence, classes)
-
                         boxes.append(box)
-    print(boxes)
+
     # suppress non-maximal boxes
     for c in range(nb_class):
         sorted_indices = list(reversed(np.argsort([box.classes[c] for box in boxes])))
@@ -746,5 +745,4 @@ def draw_boxes(image, boxes, labels):
                     cv2.FONT_HERSHEY_SIMPLEX,
                     1.5e-3 * image_h,
                     (0, 255, 0), 1)
-
     return image
