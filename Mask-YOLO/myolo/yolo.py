@@ -156,7 +156,7 @@ class MaskYOLO:
             return boxes, scores, classes
 
     def train(self, train_dataset, val_dataset, learning_rate, num_train, batch_size,
-              augmentation=None, custom_callbacks=None, no_augmentation_sources=None):
+              stage1epochs, stage2epochs):
         """Train the model.
         train_dataset, val_dataset: Training and validation Dataset objects.
         learning_rate: The learning rate to train with
@@ -259,7 +259,7 @@ class MaskYOLO:
             steps_per_epoch=5,
             # validation_data=val_generator,
             # validation_steps=max(1, num_val//batch_size),
-            epochs=50,
+            epochs=stage1epochs,
             initial_epoch=0,
             # callbacks=callbacks
                                        )
@@ -274,8 +274,8 @@ class MaskYOLO:
             steps_per_epoch=max(1, num_train//batch_size),
             # validation_data=val_generator,
             # validation_steps=max(1, num_val//batch_size),
-            epochs=100,
-            initial_epoch=50,
+            epochs=stage2epochs,
+            initial_epoch=stage1epochs,
             # callbacks=callbacks
                                        )
         self.keras_model.save_weights(self.config.LOG_DIR + 'trained_weights_final.h5')
