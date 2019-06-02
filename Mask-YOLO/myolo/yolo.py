@@ -274,7 +274,7 @@ class MaskYOLO:
             steps_per_epoch=max(1, num_train//batch_size),
             # validation_data=val_generator,
             # validation_steps=max(1, num_val//batch_size),
-            epochs=500,
+            epochs=100,
             initial_epoch=50,
             # callbacks=callbacks
                                        )
