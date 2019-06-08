@@ -29,19 +29,33 @@ dataset_val.load_balloon(balloon_DIR, "val")
 dataset_val.prepare()
 
 
+# # Load random image and mask.
+# # image_id = np.random.choice(dataset_train.image_ids)
+# image_id = 18
+# image = dataset_train.load_image(image_id)
+# mask, class_ids = dataset_train.load_mask(image_id)
+# # Compute Bounding box
+# bbox = utils.extract_bboxes(mask)
+# print(bbox)
+# # Display image and additional stats
+# print("image_id ", image_id, dataset_train.image_reference(image_id))
+#
+# # Display image and instances
+# visualize.display_instances(image, bbox, mask, class_ids, dataset_train.class_names)
+
 model = yolo.MaskYOLO(mode="yolo_train",
                       weights_path="/Users/stark/Mask-YOLOv3/Mask-YOLO/model_data/yolo-tiny.h5",
                       config=config,
                       yolo_pretrain_dir=None,
                       yolo_trainable=True)
 
-model.train(dataset_train, dataset_val, num_train=50, batch_size=5, learning_rate=config.LEARNING_RATE)
+model.train(dataset_train, dataset_val, num_train=10, batch_size=1, stage1epochs=50, stage2epochs=150)
 
 # image = cv2.imread('/Users/stark/Mask-YOLOv3/Mask-YOLO/datasets/balloon/train/34020010494_e5cb88e1c4_k.jpg')
 # image = cv2.cvtColor(cv2.resize(image, (416, 416)), cv2.COLOR_BGR2RGB)
 #
 # model.infer_yolo(image, '/Users/stark/Mask-YOLOv3/Mask-YOLO/model_data/trained_weights_final.h5')
-#
+
 
 
 

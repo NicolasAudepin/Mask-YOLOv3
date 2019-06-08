@@ -21,10 +21,10 @@ from keras.utils import multi_gpu_model
 
 class YOLO(object):
     _defaults = {
-        "model_path": 'model_data/yolo-tiny.h5',
-        # "model_path": 'model_data/yolo-tiny.h5',
+        # "model_path": 'model_data/trained_weights_final.h5',
+        "model_path": 'model_data/bb.h5',
         "anchors_path": 'model_data/tiny_yolo_anchors.txt',
-        "classes_path": 'model_data/coco_classes.txt',
+        "classes_path": 'model_data/voc_classes.txt',
         "score" : 0.3,
         "iou" : 0.45,
         "model_image_size" : (416, 416),
@@ -128,6 +128,9 @@ class YOLO(object):
                 self.input_image_shape: [image.size[1], image.size[0]],
                 K.learning_phase(): 0
             })
+        print(out_boxes)
+        print(out_scores)
+        print(out_classes)
         # 预测结束，得到out_boxes, out_scores, out_classes
         # 输出找到了一个物体，下一步使用结果数据在图像上画框，展示结果
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))

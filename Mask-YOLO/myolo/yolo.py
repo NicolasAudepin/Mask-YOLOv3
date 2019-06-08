@@ -21,6 +21,7 @@ from timeit import default_timer as timer
 from PIL import Image, ImageFont, ImageDraw
 
 
+
 # what's the different between class MaskYOLO(object): and class MaskYOLO:
 class MaskYOLO:
     """ Build the overall structure of MaskYOLO class
@@ -191,20 +192,7 @@ class MaskYOLO:
         """
         # assert self.mode == "training", "Create model in training mode.", "yolo"
 
-        # Pre-defined layer regular expressions
-        # layer_regex = {
-        #     # all layers but the backbone
-        #     # "heads": r"(mrcnn\_.*)|(rpn\_.*)|(fpn\_.*)",
-        #     # # From a specific Resnet stage and up
-        #     # "3+": r"(res3.*)|(bn3.*)|(res4.*)|(bn4.*)|(res5.*)|(bn5.*)|(mrcnn\_.*)|(rpn\_.*)|(fpn\_.*)",
-        #     # "4+": r"(res4.*)|(bn4.*)|(res5.*)|(bn5.*)|(mrcnn\_.*)|(rpn\_.*)|(fpn\_.*)",
-        #     # "5+": r"(res5.*)|(bn5.*)|(mrcnn\_.*)|(rpn\_.*)|(fpn\_.*)",
-        #     # All layers
-        #     "all": ".*",
-        # }
-        # if layers in layer_regex.keys():
-        #     layers = layer_regex[layers]
-
+        num_val = num_train // 10
 
         # Data generators
         train_info = []
@@ -212,22 +200,25 @@ class MaskYOLO:
             image, gt_class_ids, gt_boxes, gt_masks = \
                 utils.load_image_gt(train_dataset, self.config, id,
                                      use_mini_mask=self.config.USE_MINI_MASK)
+            # visualize.display_instances(image, gt_boxes, gt_masks, gt_class_ids, train_dataset.class_names)
             train_info.append([image, gt_class_ids, gt_boxes, gt_masks])
 
-        # val_info = []
-        # for id in range(0, 10):
-        #     image, gt_class_ids, gt_boxes, gt_masks = \
-        #         utils.load_image_gt(val_dataset, self.config, id,
-        #                              use_mini_mask=self.config.USE_MINI_MASK)
-        #     val_info.append([image, gt_class_ids, gt_boxes, gt_masks])
-        # train_generator = utils.BatchGenerator(train_info, self.config, mode=self.mode,
-        #                                         shuffle=True, jitter=False, norm=True)
-
-        # val_generator = utils.BatchGenerator(val_info, self.config, mode=self.mode,
-        #                                       shuffle=True, jitter=False, norm=True)
+        val_info = []
+        for id in range(num_train//10):
+            image, gt_class_ids, gt_boxes, gt_masks = \
+                utils.load_image_gt(val_dataset, self.config, id,
+                                     use_mini_mask=self.config.USE_MINI_MASK)
+            val_info.append([image, gt_class_ids, gt_boxes, gt_masks])
 
         train_generator = utils.data_generator(train_info, batch_size=batch_size, config=self.config)
-        # val_generator = utils.data_generator(val_info, 10, self.config)
+        val_generator = utils.data_generator(val_info, 10, self.config)
+
+        output = train_generator.__next__()
+        print(output[0][0].shape)
+        print(output[0][1].shape)
+        print(output[0][2].shape)
+
+        output = [output[0][1], output[0][2]]
 
         # Create log_dir if it does not exist
         if not os.path.exists(self.config.LOG_DIR):
@@ -236,10 +227,8 @@ class MaskYOLO:
         # Callbacks
         callbacks = [
             keras.callbacks.TensorBoard(log_dir='./', histogram_freq=0, write_graph=True, write_images=False),
-            # ModelCheckpoint(self.config.LOG_DIR + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
-            #                 monitor='val_loss', save_weights_only=True, save_best_only=True, period=50),
             ModelCheckpoint(self.config.LOG_DIR + 'ep{epoch:03d}-loss{loss:.3f}-val_loss{val_loss:.3f}.h5',
-                            save_weights_only=True, save_best_only=True, period=50),
+                            monitor='val_loss', save_weights_only=True, save_best_only=True, period=50),
         ]
 
         # Train with frozen layers first, to get a stable loss.
@@ -253,30 +242,28 @@ class MaskYOLO:
             # use custom yolo_loss Lambda layer.
             'yolo_loss': lambda y_true, y_pred: y_pred}
                                  )
-        num_val = 12
 
         self.keras_model.fit_generator(train_generator,
-            steps_per_epoch=5,
-            # validation_data=val_generator,
-            # validation_steps=max(1, num_val//batch_size),
+            steps_per_epoch=max(1, num_train//batch_size),
+            validation_data=val_generator,
+            validation_steps=max(1, num_val//batch_size),
             epochs=stage1epochs,
             initial_epoch=0,
-            # callbacks=callbacks
+            callbacks=callbacks
                                        )
         self.keras_model.save_weights(self.config.LOG_DIR + 'trained_weights_stage_1.h5')
         for i in range(len(self.keras_model.layers)):
             self.keras_model.layers[i].trainable = True
         self.keras_model.compile(optimizer=Adam(lr=1e-4), loss={'yolo_loss': lambda y_true, y_pred: y_pred}) # recompile to apply the change
         print('Unfreeze all of the layers.')
-        num_val = 12
 
         self.keras_model.fit_generator(train_generator,
             steps_per_epoch=max(1, num_train//batch_size),
-            # validation_data=val_generator,
-            # validation_steps=max(1, num_val//batch_size),
+            validation_data=val_generator,
+            validation_steps=max(1, num_val//batch_size),
             epochs=stage2epochs,
             initial_epoch=stage1epochs,
-            # callbacks=callbacks
+            callbacks=callbacks
                                        )
         self.keras_model.save_weights(self.config.LOG_DIR + 'trained_weights_final.h5')
 
