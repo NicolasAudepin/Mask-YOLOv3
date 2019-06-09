@@ -71,7 +71,7 @@ class MaskYOLO:
 
         # TODO freeze_body need be clear
         # TODO load_pretrained need be flexible
-    def build(self, mode, load_pretrained=True, freeze_body=1):
+    def build(self, mode, load_pretrained=False, freeze_body=1):
         '''create the training model, for Tiny YOLOv3'''
 
         # TODO
