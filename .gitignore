@@ -5,3 +5,4 @@ detector/.DS_Store
 *.pyc
 *.local
 *.h5
+*.pyc
