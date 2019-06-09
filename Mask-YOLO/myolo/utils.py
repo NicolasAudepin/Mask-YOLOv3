@@ -396,13 +396,16 @@ def data_generator(data_info, batch_size, config):
     while True:
         image_data = []
         box_data = []
-        for b in range(batch_size):
+        for _ in range(batch_size):
             if i == 0:
                 np.random.shuffle(data_info)
             box = np.zeros((20, 5))
             image, single_box = data_info[i][0], np.concatenate((data_info[i][2], data_info[i][1].reshape(len(data_info[i][1]), 1)), axis=1)
+            # print("image shape: ", image.shape)
+            # print("single_box shape: ", single_box)
             box[:len(single_box)] = single_box
             image_data.append(image)
+            # print("box shape: ", box)
             box_data.append(list(box))
             i = (i + 1) % n
 
@@ -584,10 +587,12 @@ def yolo_eval(yolo_outputs,
     # 每个输出的尺度不同，需要不同尺度的anchor_mask
     anchor_mask = [[6, 7, 8], [3, 4, 5], [0, 1, 2]] if num_layers == 3 else [[3, 4, 5], [1, 2, 3]]  # default setting
     input_shape = K.shape(yolo_outputs[0])[1:3] * 32
-
+    print("output num of layers is ", num_layers)
     boxes = []
     box_scores = []
     for l in range(num_layers):
+        # print(yolo_outputs[l].shape)
+        # (?, ?, ?, 21)
         _boxes, _box_scores = yolo_boxes_and_scores(yolo_outputs[l],
                                                     anchors[anchor_mask[l]], num_classes, input_shape, image_shape)
         boxes.append(_boxes)
@@ -684,9 +689,9 @@ def decode_one_yolo_output(netoutlist, anchors, nb_class, obj_threshold=0.3, nms
         grid_h, grid_w, nb_box = netout.shape[:3]
 
         # decode the output by the network
-        netout[..., 4] = _sigmoid(netout[..., 4])
-        netout[..., 5:] = netout[..., 4][..., np.newaxis] * _softmax(netout[..., 5:])
-        netout[..., 5:] *= netout[..., 5:] > obj_threshold
+        # netout[..., 4] = _sigmoid(netout[..., 4])
+        # netout[..., 5:] = netout[..., 4][..., np.newaxis] * _softmax(netout[..., 5:])
+        # netout[..., 5:] *= netout[..., 5:] > obj_threshold
 
         for row in range(grid_h):
             for col in range(grid_w):
@@ -695,6 +700,7 @@ def decode_one_yolo_output(netoutlist, anchors, nb_class, obj_threshold=0.3, nms
                     classes = netout[row, col, b, 5:]
 
                     if np.sum(classes) > 0:
+                        print(classes)
                         # first 4 elements are x, y, w, and h
                         x, y, w, h = netout[row, col, b, :4]
 
@@ -746,3 +752,104 @@ def draw_boxes(image, boxes, labels):
                     1.5e-3 * image_h,
                     (0, 255, 0), 1)
     return image
+
+
+def compute_iou(box, boxes, box_area, boxes_area):
+    """Calculates IoU of the given box with the array of the given boxes.
+    box: 1D vector [y1, x1, y2, x2]
+    boxes: [boxes_count, (y1, x1, y2, x2)]
+    box_area: float. the area of 'box'
+    boxes_area: array of length boxes_count.
+
+    Note: the areas are passed in rather than calculated here for
+    efficiency. Calculate once in the caller to avoid duplicate work.
+    """
+    # Calculate intersection areas
+    y1 = np.maximum(box[0], boxes[:, 0])
+    y2 = np.minimum(box[2], boxes[:, 2])
+    x1 = np.maximum(box[1], boxes[:, 1])
+    x2 = np.minimum(box[3], boxes[:, 3])
+    intersection = np.maximum(x2 - x1, 0) * np.maximum(y2 - y1, 0)
+    union = box_area + boxes_area[:] - intersection[:]
+    iou = intersection / union
+    return iou
+
+
+def compute_overlaps(boxes1, boxes2):
+    """Computes IoU overlaps between two sets of boxes.
+    boxes1, boxes2: [N, (y1, x1, y2, x2)].
+
+    For better performance, pass the largest set first and the smaller second.
+    """
+    # Areas of anchors and GT boxes
+    area1 = (boxes1[:, 2] - boxes1[:, 0]) * (boxes1[:, 3] - boxes1[:, 1])
+    area2 = (boxes2[:, 2] - boxes2[:, 0]) * (boxes2[:, 3] - boxes2[:, 1])
+
+    # Compute overlaps to generate matrix [boxes1 count, boxes2 count]
+    # Each cell contains the IoU value.
+    overlaps = np.zeros((boxes1.shape[0], boxes2.shape[0]))
+    for i in range(overlaps.shape[1]):
+        box2 = boxes2[i]
+        overlaps[:, i] = compute_iou(box2, boxes1, area2[i], area1)
+    return overlaps
+
+
+def compute_overlaps_masks(masks1, masks2):
+    """Computes IoU overlaps between two sets of masks.
+    masks1, masks2: [Height, Width, instances]
+    """
+
+    # If either set of masks is empty return empty result
+    if masks1.shape[-1] == 0 or masks2.shape[-1] == 0:
+        return np.zeros((masks1.shape[-1], masks2.shape[-1]))
+    # flatten masks and compute their areas
+    masks1 = np.reshape(masks1 > .5, (-1, masks1.shape[-1])).astype(np.float32)
+    masks2 = np.reshape(masks2 > .5, (-1, masks2.shape[-1])).astype(np.float32)
+    area1 = np.sum(masks1, axis=0)
+    area2 = np.sum(masks2, axis=0)
+
+    # intersections and union
+    intersections = np.dot(masks1.T, masks2)
+    union = area1[:, None] + area2[None, :] - intersections
+    overlaps = intersections / union
+
+    return overlaps
+
+
+def non_max_suppression(boxes, scores, threshold):
+    """Performs non-maximum suppression and returns indices of kept boxes.
+    boxes: [N, (y1, x1, y2, x2)]. Notice that (y2, x2) lays outside the box.
+    scores: 1-D array of box scores.
+    threshold: Float. IoU threshold to use for filtering.
+    """
+    assert boxes.shape[0] > 0
+    if boxes.dtype.kind != "f":
+        boxes = boxes.astype(np.float32)
+
+    # Compute box areas
+    y1 = boxes[:, 0]
+    x1 = boxes[:, 1]
+    y2 = boxes[:, 2]
+    x2 = boxes[:, 3]
+    area = (y2 - y1) * (x2 - x1)
+
+    # Get indicies of boxes sorted by scores (highest first)
+    ixs = scores.argsort()[::-1]
+
+    pick = []
+    while len(ixs) > 0:
+        # Pick top box and add its index to the list
+        i = ixs[0]
+        pick.append(i)
+        # Compute IoU of the picked box with the rest
+        iou = compute_iou(boxes[i], boxes[ixs[1:]], area[i], area[ixs[1:]])
+        # Identify boxes with IoU over the threshold. This
+        # returns indices into ixs[1:], so add 1 to get
+        # indices into ixs.
+        remove_ixs = np.where(iou > threshold)[0] + 1
+        # Remove indices of the picked and overlapped boxes.
+        ixs = np.delete(ixs, remove_ixs)
+        ixs = np.delete(ixs, 0)
+    return np.array(pick, dtype=np.int32)
+
+

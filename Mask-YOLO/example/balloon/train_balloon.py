@@ -46,7 +46,7 @@ dataset_val.prepare()
 model = yolo.MaskYOLO(mode="yolo_train",
                       weights_path="/Users/stark/Mask-YOLOv3/Mask-YOLO/model_data/yolo-tiny.h5",
                       config=config,
-                      yolo_pretrain_dir=None,
+                      pretrained=None,
                       yolo_trainable=True)
 
 model.train(dataset_train, dataset_val, num_train=10, batch_size=1, stage1epochs=50, stage2epochs=150)

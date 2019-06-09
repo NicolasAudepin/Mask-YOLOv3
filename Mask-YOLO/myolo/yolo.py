@@ -44,6 +44,7 @@ class MaskYOLO:
                  mode,
                  config,
                  weights_path=None,
+                 pretrained=None,
                  yolo_pretrain_dir=None,
                  yolo_trainable=True):
         """
@@ -60,7 +61,7 @@ class MaskYOLO:
 
         # self.keras_model = self.build(mode=mode, self.config=self.config)
         if self.mode == "yolo_train":
-            self.keras_model = self.build(mode=mode)
+            self.keras_model = self.build(mode=mode, load_pretrained=pretrained)
         elif self.mode == "yolo_detect":
             self.sess = K.get_session()
             self.boxes, self.scores, self.classes = self.build(mode=mode)
@@ -71,7 +72,7 @@ class MaskYOLO:
 
         # TODO freeze_body need be clear
         # TODO load_pretrained need be flexible
-    def build(self, mode, load_pretrained=False, freeze_body=1):
+    def build(self, mode, load_pretrained=True, freeze_body=1):
         '''create the training model, for Tiny YOLOv3'''
 
         # TODO
