@@ -71,7 +71,7 @@ class MaskYOLO:
 
         # TODO freeze_body need be clear
         # TODO load_pretrained need be flexible
-    def build(self, mode, load_pretrained=True, freeze_body=2):
+    def build(self, mode, load_pretrained=True, freeze_body=1):
         '''create the training model, for Tiny YOLOv3'''
 
         # TODO
@@ -212,13 +212,6 @@ class MaskYOLO:
 
         train_generator = utils.data_generator(train_info, batch_size=batch_size, config=self.config)
         val_generator = utils.data_generator(val_info, 10, self.config)
-
-        output = train_generator.__next__()
-        print(output[0][0].shape)
-        print(output[0][1].shape)
-        print(output[0][2].shape)
-
-        output = [output[0][1], output[0][2]]
 
         # Create log_dir if it does not exist
         if not os.path.exists(self.config.LOG_DIR):
@@ -436,6 +429,7 @@ class MaskYOLO:
         # 图像预处理结束，输出图像大小（1, 416， 416， 3）
 
         # 将图像输入模型进行预测
+        print(image.size[1], image.size[0])
         out_boxes, out_scores, out_classes = self.sess.run(
             [self.boxes, self.scores, self.classes],
             feed_dict={
