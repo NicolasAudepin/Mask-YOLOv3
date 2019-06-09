@@ -28,7 +28,7 @@ class ShapesConfig(Config):
 
     MAX_GT_INSTANCES = 10
 
-    INPUT_SHAPE = (416, 416)  # multiple of 32, hw
+    INPUT_SHAPE = (128, 128)  # multiple of 32, hw
 
     # Number of classes (including background)
     NUM_CLASSES = 1 + 3      # (no background) 3 shapes
