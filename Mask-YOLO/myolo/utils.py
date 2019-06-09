@@ -405,6 +405,10 @@ def data_generator(data_info, batch_size, config):
             # print("single_box shape: ", single_box)
             box[:len(single_box)] = single_box
             image_data.append(image)
+
+            # for test only
+            image = np.random.rand(416, 416, 3)
+
             # print("box shape: ", box)
             box_data.append(list(box))
             i = (i + 1) % n

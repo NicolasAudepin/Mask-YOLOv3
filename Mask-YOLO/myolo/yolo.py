@@ -202,6 +202,8 @@ class MaskYOLO:
                 utils.load_image_gt(train_dataset, self.config, id,
                                      use_mini_mask=self.config.USE_MINI_MASK)
             # visualize.display_instances(image, gt_boxes, gt_masks, gt_class_ids, train_dataset.class_names)
+            # image = image / 255.
+            # print(image)
             train_info.append([image, gt_class_ids, gt_boxes, gt_masks])
 
         val_info = []

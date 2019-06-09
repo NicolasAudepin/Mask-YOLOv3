@@ -49,6 +49,7 @@ model = yolo.MaskYOLO(mode="yolo_train",
                       pretrained=None,
                       yolo_trainable=True)
 
+# num_val = num_train // 10
 model.train(dataset_train, dataset_val, num_train=10, batch_size=1, stage1epochs=50, stage2epochs=150)
 
 # image = cv2.imread('/Users/stark/Mask-YOLOv3/Mask-YOLO/datasets/balloon/train/34020010494_e5cb88e1c4_k.jpg')
