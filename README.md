@@ -1,3 +1,5 @@
+project has been suspended for now.
+
 # Mask-YOLOv3
 
 Mask-yolov3 inspired by Mask-RCNN.
